@@ -30,7 +30,7 @@ extension ImageList {
         deleteImageObjects(at: offsetsToDelete)
         selection.removeAll()
     }
-    //MARK: - Move files
+    //MARK: - Move Object
     func moveImageObjects(source: IndexSet, destination: Int) {
         var imageObjects = dataModel.items
         imageObjects.move(fromOffsets: source, toOffset: destination)

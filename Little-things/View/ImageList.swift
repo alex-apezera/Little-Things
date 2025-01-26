@@ -21,7 +21,7 @@ struct ImageList: View {
         Date.distantFuture.timeIntervalSince1970
     
     private static var initialColumns = 3
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+    @State var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     @State private var numColumns = initialColumns
     private var columnsTitle: String {
         gridColumns.count > 1 ? "\(gridColumns.count) Колонок" : "1 Колонка"
@@ -39,52 +39,12 @@ struct ImageList: View {
         VStack {
             
             if listMode {
-                List(selection: $selection) {
-                    ForEach(dataModel.items) { item in
-                        HStack{
-                            NavigationLink(destination: DetailImageView(item: item).environmentObject(dataModel)) {
-                                SelectedImageView(size: 80, url: item.imageURL)
-                                    .imageGridModifier()
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.name).bold()
-                                    Text(item.price)
-                                    Text(item.specification).foregroundStyle(.secondary)
-                                }
-                                .font(.system(size: 12))
-                                .lineLimit(3)
-                                .frame(height: 90)
-                            }
-                        }
-                    }
-                    .onDelete(perform: deleteImageObjects)
-                    .onMove(perform: moveImageObjects)
-                }
+                imageListMode
             } else {
                 if isEditing {
                     ColumnStepper(title: columnsTitle, range: 1...8, columns: $gridColumns).padding(5)
                 }
-
-                ScrollView(showsIndicators: false) {
-                    LazyVGrid(columns: gridColumns) {
-                        ForEach(dataModel.items) { item in
-                            if let index = dataModel.items.firstIndex(of: item) {
-                                GeometryReader { geo in
-                                    NavigationLink(destination: DetailImageView(item: item).environmentObject(dataModel)) {
-                                        SelectedImageView(size: geo.size.width, url: item.imageURL)
-                                    }
-                                }
-                                .imageGridModifier()
-                                .overlay(alignment: .topTrailing) {
-                                    if isEditing { DeleteItem() { dataModel.removeItem(item) } } }
-                                .overlay(alignment: .bottomTrailing) {
-                                    if #available(iOS 17.0, *), isEditing {
-                                        AddItem(index: index)
-                                    }
-                                }
-                            }///if
-                        }///ForEach
-                    }.padding(.top, 5)
-                }.padding(.horizontal, 7)
+                imageGridMode
             }
         }
         .onAppear {refreshImageUrls(for: &dataModel.items)}
