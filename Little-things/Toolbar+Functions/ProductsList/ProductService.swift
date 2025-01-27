@@ -10,8 +10,7 @@ import SwiftData
 @available(iOS 17.0, *)
 extension ProductsList {
     
-    func addProduct(_ newProduct: Object) {
-        withAnimation {modelContext.insert(newProduct)}
+    func saveContext() {
         do {
             try modelContext.save()
         } catch {
@@ -19,12 +18,37 @@ extension ProductsList {
         }
     }
     
-    func deleteProduct(offsets: IndexSet) {
+    func addProduct(_ newProduct: Object) {
+        withAnimation {modelContext.insert(newProduct)}
+        saveContext()
+    }
+    
+    func deleteProducts(for codes: Set<String>) {
+        let favorites = objects
+        var offsetsToDelete: IndexSet = []
+        for (index, element) in favorites.enumerated() {
+            if codes.contains(element.id) {
+                offsetsToDelete.insert(index)
+            }
+            deleteProducts(at: offsetsToDelete)
+            selection.removeAll()
+        }
+    }
+    
+    func deleteProducts(at offsets: IndexSet) {
+        var favorites = objects
         for index in offsets {
             withAnimation {
-                modelContext.delete(products[index])
+                modelContext.delete(favorites[index])
             }
         }
+        favorites.remove(atOffsets: offsets)
+    }
+    
+    func moveProducts(source: IndexSet, destination: Int) {
+        var imageObjects = objects
+        imageObjects.move(fromOffsets: source, toOffset: destination)
+        saveContext()
     }
     
     func deleteProduct(for item: Object) {

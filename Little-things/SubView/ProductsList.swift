@@ -11,10 +11,15 @@ import SwiftData
 @available(iOS 17.0, *)
 struct ProductsList: View {
     @EnvironmentObject var dataModel: DataModel
-    @State var isEditing = false
-    @State var addProducts: Bool = false
-    @State var deleteProducts: Bool = false
-    @AppStorage("addProduct") var addProduct: Bool = false
+    @AppStorage("favoritesIsEdit") var favoritesIsEdit: Bool = false
+    @State var addFavorites: Bool = false
+    @State var deleteFavorites: Bool = false
+    
+    @AppStorage("favoritesListMode") var favoritesListMode: Bool = false
+    @State var selection: Set<String> = []
+    @State var editMode: EditMode = .inactive
+    
+    @AppStorage("addProductToObjects") var addProductToObjects: Bool = false
     @AppStorage("indexToAddProduct") var indexAddProduct: Int?
     @AppStorage("productsCount") var productsCount: Int = 0
     @AppStorage("lastUpdatedProduct")
@@ -32,45 +37,53 @@ struct ProductsList: View {
     var objects: [Object] { sortByName ? products : productsByPrice }
 
     private static var initialColumns = 3
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+    @State var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     @State private var numColumns = initialColumns
     private var columnsTitle: String {
         gridColumns.count > 1 ? "\(gridColumns.count) Колонок" : "1 Колонка"
     }
     
-    private var title: String {
-        "Товаров: \(products.count)"
+    var title: String {
+        if editMode == .inactive || selection.isEmpty {
+            return "Избранные: \(objects.count)"
+        } else {
+            return "\(selection.count) выбрано"
+        }
     }
-        
+
     var body: some View {
         
         VStack {
-            if isEditing {
-                ColumnStepper(title: columnsTitle, range: 1...8, columns: $gridColumns).padding(5)
-            }
+            
             if sortByName {
                 if !products.isEmpty {Text("Отсортировано по названию").font(.caption)}
             } else {
                 if !products.isEmpty {Text("Отсортировано по возрастанию в цене").font(.caption)}
             }
-            ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: gridColumns) {
-                    showProducts(objects)
-                }.padding(.top, 5)
-            }.padding(.horizontal, 7)
+            
+            if favoritesListMode {
+                productListMode
+            } else {
+                if favoritesIsEdit {
+                    ColumnStepper(title: columnsTitle, range: 1...8, columns: $gridColumns).padding(5)
+                }
+                productGridMode
+            }
         }
-        .onAppear {refreshObjectUrls(for: products)}
-        .onAppear() {
-            if let indexAddProduct, addProduct {
+        .onAppear {refreshObjectUrls(for: objects)}
+        .onAppear {
+            if let indexAddProduct, addProductToObjects {
                 addProductFromDataModel(for: indexAddProduct)
             }
-            addProduct = false
+            addProductToObjects = false
         }
         .onChange(of: objects)  { newValue in
             productsCount = newValue.count
             lastUpdatedProduct = Date().timeIntervalSince1970
         }
         .toolbar { productsToolbar() }
+        .environment(\.editMode, $editMode)
+        .listStyle(.inset)
         .navigationModifier(title)
     }
 }

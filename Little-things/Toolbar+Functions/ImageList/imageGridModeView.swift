@@ -1,5 +1,5 @@
 //
-//  imageGridMode.swift
+//  imageGridModeView.swift
 //  Little-things
 //
 //  Created by Алексей Езерский on 27.01.2025.
@@ -9,7 +9,7 @@ import SwiftUI
 
 extension ImageList {
     
-    var imageGridMode: some View {
+    var imageGridModeView: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: gridColumns) {
                 ForEach(dataModel.items) { item in

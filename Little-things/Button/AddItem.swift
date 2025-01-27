@@ -12,12 +12,12 @@ import SwiftUI
 struct AddItem: View {
     let index: Int
     @AppStorage("tabSelected") var tabSelected = 0
-    @AppStorage("addProduct") var addProduct: Bool = false
+    @AppStorage("addProductToObjects") var addProductToObjects: Bool = false
     @AppStorage("indexToAddProduct") var indexToAddProduct: Int?
 
     var body: some View {
         Button {
-            addProduct = true
+            addProductToObjects = true
             tabSelected = 1
             indexToAddProduct = index
         } label: {

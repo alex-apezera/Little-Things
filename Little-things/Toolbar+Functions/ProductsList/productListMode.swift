@@ -1,5 +1,5 @@
 //
-//  imageListMode.swift
+//  productListMode.swift
 //  Little-things
 //
 //  Created by Алексей Езерский on 27.01.2025.
@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-extension ImageList {
+@available(iOS 17.0, *)
+extension ProductsList {
     
-    var imageListMode: some View {
+    var productListMode: some View {
+        
         List(selection: $selection) {
-            ForEach(dataModel.items) { item in
+            ForEach(objects) { item in
                 HStack{
-                    NavigationLink(destination: DetailImageView(item: item).environmentObject(dataModel)) {
-                        SelectedImageView(size: 80, url: item.imageURL)
+                    NavigationLink(destination: DetailProductView(item: item, products: objects)) {
+                        SelectedImageView(size: 85, url: item.imageURL)
                             .imageGridModifier()
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.name).bold()
@@ -27,8 +29,9 @@ extension ImageList {
                     }
                 }
             }
-            .onDelete(perform: deleteImageObjects)
-            .onMove(perform: moveImageObjects)
+            .onDelete(perform: deleteProducts)
+            .onMove(perform: moveProducts)
         }
     }
 }
+

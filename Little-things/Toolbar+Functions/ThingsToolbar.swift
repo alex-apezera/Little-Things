@@ -29,37 +29,21 @@ extension ImageList {
         }
 //MARK: - Editing Mode
         ToolbarItem(placement: .topBarLeading) {
-            Button {
-                withAnimation {
-                    if listMode {
-                        if editMode == .active {
-//                            action()
-                            editMode = .inactive
-                        } else {
-                            editMode = .active
-                        }
-                    } else {
-                        isEditing.toggle()
-                    }
-                }
-            } label: {
-                Image(systemName: isEditing || editMode == .active ? "pencil.slash" : "pencil")
-                    .foregroundStyle(isEditing || editMode == .active ? .orange : .accentColor)
-            }
-            .disabled(dataModel.items.isEmpty)
+            imageEditButton
         }
 //MARK: - Bottom State String
         ToolbarItemGroup(placement: .bottomBar) {
-            ListModeToggle()
+            ListModeToggle(editMode: $editMode, listMode: $listMode, isEditing: $isEditing)
 //            RefreshButton().environmentObject(dataModel)
             Spacer()
             ToolbarStatus(title: "фото", lastUpdated: lastUpdatedObject, count: dataModel.items.count)
             Spacer()
             if editMode == .active {
-                DeleteButton(allObjects: false) {deleteImageObjects(for: selection)}
+                DeleteButton(allObjects: false) { withAnimation{deleteImageObjects(for: selection)}}
                 .disabled(selection.isEmpty)
             } else {
-                DeleteButton(allObjects: true, action: dataModel.removeAllItems)
+                DeleteButton(allObjects: true, action: withAnimation {dataModel.removeAllItems})
+                    .disabled(dataModel.items.isEmpty)
             }
         }
     }

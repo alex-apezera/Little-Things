@@ -14,7 +14,7 @@ struct ImageList: View {
     @State var editMode: EditMode = .inactive
 
     @AppStorage("listMode") var listMode: Bool = false
-    @AppStorage("addProduct") var addProduct: Bool = false
+    @AppStorage("addProductToObjects") var addProductToObjects: Bool = false
     @AppStorage("indexToAddProduct") var indexToAddProduct: Int?
     @AppStorage("lastUpdatedObject")
     var lastUpdatedObject = /*Date().timeIntervalSince1970*/
@@ -39,12 +39,12 @@ struct ImageList: View {
         VStack {
             
             if listMode {
-                imageListMode
+                imageListModeView
             } else {
                 if isEditing {
                     ColumnStepper(title: columnsTitle, range: 1...8, columns: $gridColumns).padding(5)
                 }
-                imageGridMode
+                imageGridModeView
             }
         }
         .onAppear {refreshImageUrls(for: &dataModel.items)}
