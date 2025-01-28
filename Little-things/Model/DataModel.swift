@@ -9,20 +9,18 @@ import Foundation
 
 final class DataModel: ObservableObject {
     @Published var items: [Item] = []
-    
-        init() {
-            items = retrieveDataObject()
-            print(#function, "Retrieved ITEMS from document directory: \(String(describing: dataModelURL))")
-            items.forEach { print("\n", $0) }
 
-            /// This is actually for iOS devices
-//            refreshImageUrls(for: &items)
-        }
+    ///Recall initial state
+    init() {
+        items = retrieveDataObject()
+        refreshImageUrls(for: &items)//Actually for iOS
+    }
  
     /// Adds an item to the data collection
     func addItem(_ item: Item) {
         items.insert(item, at: 0)
-        storeDataObject(items)
+        print("\n", #function, "Sucsesfully added item: \(item)", "\n")
+        storeDataObject(items)///Refreshes data collection
     }
     
     /// Removes an item from the data collection
@@ -31,21 +29,21 @@ final class DataModel: ObservableObject {
             items.remove(at: index)
             FileManager.default.removeFileFromDocumentDirectory(url: item.imageURL)
         }
-        storeDataObject(items)
+        print("\n", #function, "Sucsesfully removed item: \(item)", "\n")
+        storeDataObject(items)///Refreshes data collection
     }
     
     /// Deletes items from data collection and urls from document directory
     func removeAllItems() {
-        if let documentDirectory = FileManager.default.documentDirectory {
-            let urls = FileManager.default.getContentsOfDirectory(documentDirectory).filter { $0.isImage }
+        guard let documentDirectory = FileManager.default.documentDirectory else { return }
+        let urls = FileManager.default.getContentsOfDirectory(documentDirectory).filter { [$0.isImage, $0.isVideo].contains(true) }
             
             for url in urls {
                 FileManager.default.removeFileFromDocumentDirectory(url: url)
             }
-            print("URLs DELETING FROM DOCUMENT DIRECTORY: \(urls)")
-        }
+            print("URLs DELETED FROM DOCUMENT DIRECTORY: \(urls)")
+//        }
         items.removeAll()
-        storeDataObject(items) /// Refreshes data collection to zero
-//        clearDataModel() /// Delete dataModel.data file
+        clearDataModel() /// Delete dataModel.json file
     }
 }

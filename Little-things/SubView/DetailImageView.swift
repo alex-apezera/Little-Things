@@ -23,7 +23,7 @@ struct DetailImageView: View {
                         HStack {
                             ForEach(dataModel.items) { item in
                                 if item.name == dataModel.items[index].name {
-                                    GesturedPhotoView(size: geo.size.width*scaleOfPhoto, url: item.imageURL).imageCellModifier()
+                                    DetailFileView(size: geo.size.width*scaleOfPhoto, url: item.imageURL).imageCellModifier()
                                 }
                             }
                         }
@@ -32,13 +32,17 @@ struct DetailImageView: View {
                 .padding(5)
                 VStack {
                     ObjectDescription(isPresented: $editName, property: $dataModel.items[index].name, title: "Название", prompt: "Введите название", font: iPadDevice ? .title3 : .body).padding(.bottom, 5)
-                    
+                        .onChange(of: dataModel.items[index].name) { _ in
+                            storeDataObject(dataModel.items)
+                        }
                     ObjectDescription(isPresented: $editPrice, property: $dataModel.items[index].price, title: "Цена", prompt: "Введите цену", font: iPadDevice ? .body : .caption).padding(.bottom, 10)
-                    
+                        .onChange(of: dataModel.items[index].price) { _ in
+                            storeDataObject(dataModel.items)
+                        }
                     ObjectDescription(isPresented: $editDescription, property: $dataModel.items[index].specification, title: "Oписание", prompt: "Введите описание", font: iPadDevice ? .body : .caption).padding(.bottom, 20)
-                }
-                .onDisappear {
-                    storeDataObject(dataModel.items)
+                        .onChange(of: dataModel.items[index].specification) { _ in
+                            storeDataObject(dataModel.items)
+                        }
                 }
             }
         }

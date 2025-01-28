@@ -16,14 +16,17 @@ struct Item: Identifiable, Codable {
     var price: String
     var specification: String
     var imageURL: URL
+    var isFavorite: Bool
     
+/* // See func getImageData
     init(id: String, name: String, price: String, specification: String, imageURL: URL) {
         self.id = id
-        self.name = id
-        self.price = "0.00"
-        self.specification = ""
-        self.imageURL = imageURL
+        self.name = "Не задано"
+        self.price = "00:00"
+        self.specification = "Нет данных"
+        self.imageURL = URL(fileURLWithPath: "")
     }
+ */
 }
 
 extension Item: Equatable {

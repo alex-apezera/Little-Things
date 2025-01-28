@@ -29,3 +29,18 @@ struct ObjectDescription: View {
         }
     }
 }
+
+struct SimpleDescription: View {
+    let property: String
+    let title: String
+    let font: Font
+    
+    var body: some View {
+        HStack {
+            Text(title).foregroundStyle(.secondary).fontWeight(.ultraLight)
+            Text("  ")
+            Text(property)
+        }
+        .font(font)
+    }
+}

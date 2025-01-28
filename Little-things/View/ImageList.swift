@@ -6,32 +6,48 @@
 //
 
 import SwiftUI
+import PhotosUI
 
+/// Gallery view of media files with associated data model items
 struct ImageList: View {
     @EnvironmentObject var dataModel: DataModel
     @AppStorage("isEditing") var isEditing = false
     @State var selection: Set<String> = []
     @State var editMode: EditMode = .inactive
+    @State var selectedItems: [PhotosPickerItem] = []
+    @State var selectedItem: PhotosPickerItem?
+    @State var isLoading: Bool = false
 
     @AppStorage("listMode") var listMode: Bool = false
-    @AppStorage("addProductToObjects") var addProductToObjects: Bool = false
-    @AppStorage("indexToAddProduct") var indexToAddProduct: Int?
+    @AppStorage("tabSelected") var tabSelected = 0
+    @AppStorage("enableVideo") var enableVideo = false
+    @AppStorage("onlyPhotoSelection") var onlyPhotoSelection = true
+    @AppStorage("copyFile") var copyFile: URL = URL(fileURLWithPath: "")
+    
     @AppStorage("lastUpdatedObject")
     var lastUpdatedObject = /*Date().timeIntervalSince1970*/
         Date.distantFuture.timeIntervalSince1970
+    @AppStorage("lastUpdatedProduct")
+    var lastUpdatedProduct = Date.distantFuture.timeIntervalSince1970
     
-    private static var initialColumns = 3
+    @AppStorage("initialColumns") static var initialColumns = 3
     @State var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     @State private var numColumns = initialColumns
     private var columnsTitle: String {
-        gridColumns.count > 1 ? "\(gridColumns.count) Колонок" : "1 Колонка"
+        let count = gridColumns.count
+        switch count {
+        case 1: return "1 Колонка"
+        case 2...4: return "\(count) Колонки"
+        case 5...8: return "\(count) Колонок"
+        default: return "\(count) Колоноки"
+        }
     }
-    
+
     var title: String {
         if editMode == .inactive || selection.isEmpty {
-            return "Объектов: \(dataModel.items.count)"
+            return "Галерея"
         } else {
-            return "\(selection.count) выбрано"
+            return "Выбрано: \(selection.count)"
         }
     }
 
@@ -47,9 +63,11 @@ struct ImageList: View {
                 imageGridModeView
             }
         }
-        .onAppear {refreshImageUrls(for: &dataModel.items)}
+        .onChange(of: selectedItems) { newItems in ///Get & store data from items
+            storeImagesData(newItems)
+        }
         .refreshable {storeDataObject(dataModel.items)}
-        .toolbar {thingsToolbar()}
+        .toolbar {imageListToolbar}
         .environment(\.editMode, $editMode)
         .listStyle(.inset)
         .navigationModifier(title)

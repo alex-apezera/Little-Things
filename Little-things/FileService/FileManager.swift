@@ -7,16 +7,20 @@
 
 import Foundation
 
-//MARK: - Path to store MetaData in FileManager
-let dataModelURL = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.data")
-
-
 extension FileManager {
     
-    //MARK: - Create new folder for music files
+    //MARK: - Path to store DataModel in FileManager
+    static var dataModelURL: URL?  {
+        let url = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.json")
+//        print("\n", #function, url ?? URL(string: "nil")!)
+        return url
+    }
+    
+    //MARK: - Create new folder for photo objects files
 
     static func getDocumentsDirectory() -> URL {
         let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        print("\n", #function, paths.first!)
         return paths.first!
     }
         
@@ -31,9 +35,7 @@ extension FileManager {
     /// - returns: The URL of the copied or existing file in the documents directory, or nil if the copy failed.
     ///
     func copyItemToDocumentDirectory(from sourceURL: URL, to fileName: String ) -> URL? {
-        let documentDirectory = FileManager.getDocumentsDirectory()
-//        guard let documentDirectory else { return nil }
-//        let fileName = sourceURL.lastPathComponent
+        guard let documentDirectory else { return nil }
         let pathExtension = sourceURL.pathExtension
         let newFileName = "\(fileName).\(pathExtension)"
         let destinationURL = documentDirectory.appendingPathComponent(newFileName)
@@ -43,7 +45,8 @@ extension FileManager {
         } else {
             do {
                 try self.copyItem(at: sourceURL, to: destinationURL)
-                print(#function, "Success copying file: ", destinationURL)
+                print("\n", #function, "Success copying file: ")
+                print("\n", "sourceURL: ", sourceURL, "\n", "destinationURL: ", destinationURL)
                 return destinationURL
             } catch let error {
                 print(#function, "Unable to copy file: \(error.localizedDescription)")
@@ -52,7 +55,7 @@ extension FileManager {
         return nil
     }
     
-    /// Create new file URL in the document directory.
+    /// Create new image URL in the document directory.
     ///
     /// - returns: The URL of the created  file in the document directory or nil if the create failed.
     ///
@@ -73,6 +76,7 @@ extension FileManager {
         if self.fileExists(atPath: fileUrl.path) {
             do {
                 try self.removeItem(at: url)
+                print("\n", #function, "Removed file: \(fileName)...")
             } catch let error {
                 print(#function, "Unable to remove file: \(error.localizedDescription)")
             }

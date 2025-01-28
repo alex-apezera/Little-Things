@@ -16,22 +16,13 @@ struct EditText: View {
 //MARK: - Input new text
     var body: some View {
         VStack {
-            HStack{
-                Button {
-                    editText = false
-                } label: {
-                    Image(systemName: "chevron.left")
-                }
-                Spacer()
-                Text(title)
-                Spacer()
-                Text("")
-            }
+            Text(title).opacity(0.5)
             TextField(prompt, text: $text)
-            .textFieldModifier()
+                .textFieldModifier()
+                .onSubmit { withAnimation {editText = false} }
         }
         .padding(10)
-        .background(.ultraThinMaterial)
+        .background(.thinMaterial)
         .cornerRadius(15)
     }
 }

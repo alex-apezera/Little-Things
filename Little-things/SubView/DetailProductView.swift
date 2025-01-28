@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailProductView: View {
     let item: Object
     @State var products: [Object]
+    @EnvironmentObject var dataModel: DataModel
     
     @State private var editName: Bool = false
     @State private var editPrice: Bool = false
@@ -22,19 +23,22 @@ struct DetailProductView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(products) { item in
-                                if item.name == products[index].name {
-                                    GesturedPhotoView(size: geo.size.width*scaleOfPhoto, url: item.imageURL).imageCellModifier()
+                                if let indexOfFavorite = dataModel.items.firstIndex(where: { $0.id == item.id }) {
+                                    if item.name == products[index].name &&
+                                        dataModel.items[indexOfFavorite].isFavorite {
+                                        DetailFileView(size: geo.size.width*scaleOfPhoto, url: item.imageURL).imageCellModifier()
+                                    }
                                 }
                             }
                         }
                     }
                 }.padding(5)
                 VStack {
-                    ObjectDescription(isPresented: $editName, property: $products[index].name, title: "Название", prompt: "Введите название", font: iPadDevice ? .title3 : .body).padding(.bottom, 5)
+                    SimpleDescription(property: products[index].name, title: "Название", font: iPadDevice ? .title3 : .body).padding(.bottom, 5)
                     
-                    ObjectDescription(isPresented: $editPrice, property: $products[index].price, title: "Цена", prompt: "Введите цену", font: iPadDevice ? .body : .caption).padding(.bottom, 10)
+                    SimpleDescription(property: products[index].price, title: "Цена", font: iPadDevice ? .body : .caption).padding(.bottom, 10)
                     
-                    ObjectDescription(isPresented: $editDescription, property: $products[index].specification, title: "Oписание", prompt: "Введите описание", font: iPadDevice ? .body : .caption).padding(.bottom, 20)
+                    SimpleDescription(property: products[index].specification, title: "Oписание", font: iPadDevice ? .body : .caption).padding(.bottom, 20)
                 }
             }
         }

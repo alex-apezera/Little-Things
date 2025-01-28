@@ -7,9 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import SwiftData
-
-//@available(iOS 17.0, *)
 
 struct PhotoPicker: UIViewControllerRepresentable {
 
@@ -57,10 +54,9 @@ struct PhotoPicker: UIViewControllerRepresentable {
             self.parent.dismiss()
             parent.presentationMode.wrappedValue.dismiss()
             
-            /// Outside:
+            /// Outside call:
 //PhotoPicker.Coordinator(PhotoPicker()).parent.dismiss()
 //PhotoPicker.Coordinator(PhotoPicker()).parent.presentationMode.wrappedValue.dismiss()
-
             
             // MARK: Fetch (and copy) Image Url from picked item
             guard
@@ -68,30 +64,29 @@ struct PhotoPicker: UIViewControllerRepresentable {
                 result.itemProvider.hasItemConformingToTypeIdentifier(UTType.image.identifier)
             else { return }
                         
-            /// Load a file representation of the picked item.
+            /// Loads a file representation of the picked item.
             /// This creates a temporary file which is then copied to the app’s document directory for persistent storage.
             result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
                 if let error {
-                    print(#function, "Error loading file representation: \(error.localizedDescription)")
+                    print("\n", #function, "Error loading file representation: \(error.localizedDescription)")
                 } else if let url {
-                        self.pickItemFromLibrary(from: url)
+                    print("\n", #function, "Loaded file representation: \(url)")
+                    self.pickItemFromLibrary(from: url)
                 }
             }
         }
         
+        /// Takes url with photo from pickeditem, copyes it and adds to DataModel
         func pickItemFromLibrary(from url: URL) {
             let id = randomString(length: idLength)
-
             if let savedUrl = FileManager.default.copyItemToDocumentDirectory(from: url, to: id) {
 
             /// Add the new item to the data model.
                 Task { @MainActor [dataModel = self.parent.dataModel] in
+                    let item = Item(id: id, name: "Фото", price: dateString(for: Date()), specification: "Данные не загружены", imageURL: savedUrl, isFavorite: false)
                     withAnimation(.spring(duration: 0.6, bounce: 0.4)) {
-                        let item = Item(id: id, name: id, price: "0.00", specification: "", imageURL: savedUrl)
-                        dataModel.addItem(item)
-                        storeDataObject(dataModel.items)
-                        print(#function, "ITEM = ", item)
-                    }
+                        dataModel.addItem(item) }
+                    storeDataObject(dataModel.items)
                 }
             }
         }

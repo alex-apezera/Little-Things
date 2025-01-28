@@ -9,12 +9,13 @@ import SwiftUI
 
 extension URL {
     
-    static var dataModel = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.data")
+    static var dataModel = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.json")
 
     // Convert and store uiimage to URL
     func saveUIImage(_ uiimage: UIImage?) async {
+        @AppStorage("jpegCompression") var jpegCompression: Double  = 1.0
         if let uiimage {
-            if let data = uiimage.jpegData(compressionQuality: 1.0) {
+            if let data = uiimage.jpegData(compressionQuality: jpegCompression) {
                 try? data.write(to: self)
             }
         } else {
@@ -37,6 +38,11 @@ extension URL {
     var isImage: Bool {
         let imageExtensions = ["jpg", "jpeg", "png", "gif", "heic"]
         return imageExtensions.contains(self.pathExtension)
+    }
+    
+    var isVideo: Bool {
+        let videoExtensions: Set<String> = ["mp4", "mov", "avi", "mkv", "webm"]
+        return videoExtensions.contains(self.pathExtension)
     }
 
 }
