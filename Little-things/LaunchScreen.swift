@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-///Greetings messsge with transition to icon image and start MainView
+///Greetings messsge with transition to icon image and start TabSelection
 struct LaunchScreen: View {
     @Binding var startApp: Bool
     @State private var startLaunch: Bool = false

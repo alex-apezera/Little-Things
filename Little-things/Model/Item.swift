@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-let idLength: Int = 8
-
 struct Item: Identifiable, Codable {
 
     var id: String

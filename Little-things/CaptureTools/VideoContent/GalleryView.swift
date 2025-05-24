@@ -57,8 +57,8 @@ struct GalleryView: View {
             
             if menuSelection == 3 {/// Select  media files to delete from library
                 switch mediaType {
-                case .video: selectVideosToDelete
-                case .photo: selectPhotosToDelete
+                case .video: selectObjectsToDelete("Выбрать видео из библиотеки", .videos)
+                case .photo: selectObjectsToDelete("Выбрать фото из библиотеки", .images)
                 }
             }
 
@@ -69,7 +69,7 @@ struct GalleryView: View {
                 }
             }
         }
-        .background(.ultraThinMaterial)
+        .background(.thinMaterial)
         .sheet(isPresented: $showDetailView) {
             if let fileImageCover { detailContent(with: fileImageCover) }
         }

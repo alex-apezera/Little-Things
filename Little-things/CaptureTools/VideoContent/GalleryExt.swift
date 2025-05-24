@@ -71,14 +71,6 @@ extension GalleryView {
         .onAppear {viewModel.fetchVideoFiles()}
     }
     
-    var selectPhotosToDelete: some View {
-        selectObjectsToDelete("Выбрать фото из библиотеки", .images)
-    }
-    
-    var selectVideosToDelete: some View {
-        selectObjectsToDelete("Выбрать видео из библиотеки", .videos)
-    }
-    
     func selectObjectsToDelete(_ message: String, _ type: PHPickerFilter) -> some View {
         PhotosPicker(message, selection: $photosPickerItems, matching: type, photoLibrary: .shared())
             .onChange(of: photosPickerItems) { items in

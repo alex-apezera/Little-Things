@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+///Length of randomized string in file names and id's
+///
+let idLength: Int = 8
+
 ///Global property which checks device is it iPad (or iPhone)
 ///
 ///It is `true` when device is iPad, and `false` otherwise
@@ -14,6 +18,7 @@ import SwiftUI
 let iPadDevice: Bool = UIDevice.current.userInterfaceIdiom == .pad
 
 ///Scales an image in `Detail Views` on `NavigationLink` screen
+///
 var scaleOfPhoto = iPadDevice ? 0.6 : 0.85
 
 ///App localized for `Russian`
@@ -26,7 +31,7 @@ struct Little_thingsApp: App {
     var body: some Scene {
         WindowGroup {
             if startApp {
-                MainView()
+                TabSelection()
             }
             else { LaunchScreen(startApp: $startApp) }
         }

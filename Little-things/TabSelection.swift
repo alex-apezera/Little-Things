@@ -8,7 +8,7 @@
 import SwiftUI
 ///Main view with menu selection in `TabView`
 struct TabSelection: View {
-    
+                   
     @AppStorage("tabSelected") var tabSelected = 0
     @AppStorage("productsCount") var productsCount: Int = 0
     @StateObject var dataModel = DataModel()
