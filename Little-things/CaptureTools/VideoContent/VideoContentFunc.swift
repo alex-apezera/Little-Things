@@ -5,9 +5,8 @@
 //  Created by Алексей Езерский on 21.04.2025.
 //
 
-import Foundation
 import Aespa
-import SwiftUICore
+import SwiftUI
 
 extension VideoContentView {
     

@@ -6,11 +6,7 @@
 	<array>
 		<string></string>
 	</array>
-    <key>UIFileSharingEnabled</key>
-    <true/>
-
-    <key>LSSupportsOpeningDocumentsInPlace</key>
-    <true/>
-
+	<key>UIFileSharingEnabled</key>
+	<true/>
 </dict>
 </plist>
