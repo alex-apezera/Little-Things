@@ -63,7 +63,7 @@ struct ImageList: View {
                 imageGridModeView
             }
         }
-        .onChange(of: selectedItems) { newItems in ///Get & store data from items
+        .onChange(of: selectedItems) { _, newItems in ///Get & store data from items
             storeImagesData(newItems)
         }
         .refreshable {storeDataObject(dataModel.items)}

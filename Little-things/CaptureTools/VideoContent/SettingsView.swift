@@ -44,7 +44,7 @@ struct SettingView: View {
                     Text("Высокое").tag(AVCaptureSession.Preset.high)
                 }
                 .modifier(TitledPicker(title: "Качество съёмки"))
-                .onChange(of: quality) { newValue in
+                .onChange(of: quality) { _, newValue in
                     viewModel.aespaSession.common(.quality(preset: newValue))
                 }
                 
@@ -54,7 +54,7 @@ struct SettingView: View {
                     Text("Непрерывно").tag(AVCaptureDevice.FocusMode.continuousAutoFocus)
                 }
                 .modifier(TitledPicker(title: "Режим фокуса"))
-                .onChange(of: focusMode) { newValue in
+                .onChange(of: focusMode) { _, newValue in
                     viewModel.aespaSession.common(.focus(mode: newValue))
                 }
                 Picker("Ориентация камеры iPad", selection: $iPadPortrait) {
@@ -62,7 +62,7 @@ struct SettingView: View {
                     Text("Вертикально").tag(true)
                 }
                 .modifier(TitledPicker(title: "Ориентация камеры iPad"))
-                .onChange(of: iPadPortrait) { newValue in
+                .onChange(of: iPadPortrait) { _, newValue in
                     viewModel.aespaSession.common(.orientation(orientation: iPadDevice ? newValue ? .portrait: .landscapeRight : .portrait))
                 }
                 .disabled(!iPadDevice)
@@ -74,7 +74,7 @@ struct SettingView: View {
                     Text("Отключен").tag(true)
                 }
                 .modifier(TitledPicker(title: "Звук"))
-                .onChange(of: isMuted) { newValue in
+                .onChange(of: isMuted) { _, newValue in
                     viewModel.aespaSession.video(newValue ? .mute : .unmute)
                 }
             }
@@ -86,7 +86,7 @@ struct SettingView: View {
                     Text("Авто").tag(AVCaptureDevice.FlashMode.auto)
                 }
                 .modifier(TitledPicker(title: "Режим вспышки"))
-                .onChange(of: flashMode) { newValue in
+                .onChange(of: flashMode) { _, newValue in
                     viewModel.aespaSession.photo(.flashMode(mode: newValue))
                 }
             }

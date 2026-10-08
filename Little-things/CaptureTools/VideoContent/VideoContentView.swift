@@ -70,7 +70,7 @@ struct VideoContentView: View {
         .navigationModifier(isCameraOff ? "Камера выключена" : "Режим видео- и фотосъёмки")
         .toolbar { videoToolbar }
         .cameraOff
-        .onChange(of: tabSelected) { _ in
+        .onChange(of: tabSelected) {
             dismiss()
         }
     }

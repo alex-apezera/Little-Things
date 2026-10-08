@@ -73,7 +73,7 @@ extension GalleryView {
     
     func selectObjectsToDelete(_ message: String, _ type: PHPickerFilter) -> some View {
         PhotosPicker(message, selection: $photosPickerItems, matching: type, photoLibrary: .shared())
-            .onChange(of: photosPickerItems) { items in
+            .onChange(of: photosPickerItems) { _, items in
                 items.forEach {item in
                     ImageManager().deleteItemFromLibrary(assetIdentifier: item.itemIdentifier!)
                 }

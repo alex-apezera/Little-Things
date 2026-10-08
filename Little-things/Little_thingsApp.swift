@@ -28,12 +28,18 @@ var scaleOfPhoto = iPadDevice ? 0.6 : 0.85
 @main
 struct Little_thingsApp: App {
     @State var startApp: Bool = false
+    @State var localeRu: Bool = false
+
     var body: some Scene {
         WindowGroup {
             if startApp {
                 TabSelection()
+                    .environment(\.locale, .init(identifier: localeRu ? localeRussian : localeEnglish))
+
             }
-            else { LaunchScreen(startApp: $startApp) }
+            else { LaunchScreen(startApp: $startApp)
+                    .environment(\.locale, .init(identifier: localeRu ? localeRussian : localeEnglish))
+            }
         }
     }
 }
@@ -41,10 +47,7 @@ struct Little_thingsApp: App {
 /// Useful snipped for localization.
 /// (don't work in this App)
 
-//@State var localeRu: Bool = true
+let localeEnglish = "en"
+let localeRussian = "ru"
 
-//let localeEnglish = "en"
-//let localeRussian = "ru"
-
-//    .environment(\.locale, .init(identifier: localeRu ? localeRussian : localeEnglish))
 

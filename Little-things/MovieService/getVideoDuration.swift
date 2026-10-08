@@ -7,12 +7,11 @@
 
 import AVFoundation
 
-// video duration stamp on firstFrame
-public func getVideoDuration(from path: URL) -> String {
+/// video duration stamp on firstFrame
+public func getVideoDuration(from path: URL) async throws -> String {
     let asset = AVURLAsset(url: path)
-    
-    let duration: CMTime =  asset.duration
-  
+    let duration: CMTime = try await asset.load(.duration)
+
     let totalSeconds = CMTimeGetSeconds(duration)
     let hours = Int(totalSeconds / 3600)
     let minutes = Int((totalSeconds.truncatingRemainder(dividingBy: 3600)) / 60)

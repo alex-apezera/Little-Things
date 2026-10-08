@@ -39,7 +39,7 @@ struct Settings: View {
                     }
                 }
             }
-            .onChange(of: enableVideo) { newValue in
+            .onChange(of: enableVideo) { _, newValue in
                 if newValue { saveToPhotoLibrary = true }
                 else { saveToPhotoLibrary = false}
             }

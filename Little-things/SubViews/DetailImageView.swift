@@ -32,15 +32,15 @@ struct DetailImageView: View {
                 .padding(5)
                 VStack {
                     ObjectDescription(isPresented: $editName, property: $dataModel.items[index].name, title: "Название", prompt: "Введите название", font: iPadDevice ? .title3 : .body).padding(.bottom, 5)
-                        .onChange(of: dataModel.items[index].name) { _ in
+                        .onChange(of: dataModel.items[index].name) {
                             storeDataObject(dataModel.items)
                         }
                     ObjectDescription(isPresented: $editPrice, property: $dataModel.items[index].price, title: "Цена", prompt: "Введите цену", font: iPadDevice ? .body : .caption).padding(.bottom, 10)
-                        .onChange(of: dataModel.items[index].price) { _ in
+                        .onChange(of: dataModel.items[index].price) {
                             storeDataObject(dataModel.items)
                         }
                     ObjectDescription(isPresented: $editDescription, property: $dataModel.items[index].specification, title: "Oписание", prompt: "Введите описание", font: iPadDevice ? .body : .caption).padding(.bottom, 20)
-                        .onChange(of: dataModel.items[index].specification) { _ in
+                        .onChange(of: dataModel.items[index].specification) { 
                             storeDataObject(dataModel.items)
                         }
                 }
