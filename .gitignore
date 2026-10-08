@@ -1,0 +1,31 @@
+# Xcode user settings
+.DS_Store
+xcuserdata/
+*.xcuserstate
+
+# Build products
+DerivedData/
+build/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Archives
+*.xcarchive
+
+# App outputs
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# Temporary files
+*.tmp
+*.swp
