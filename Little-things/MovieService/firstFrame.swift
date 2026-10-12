@@ -37,6 +37,7 @@ public struct FirstFrameView: View {
                                 .background(.black)
                                 .foregroundStyle(.white)
                                 .offset(x: 3, y: -3)
+                                .underline(false)
                         }
                     }
             } else {
@@ -62,18 +63,18 @@ public struct FirstFrameView: View {
 }
 
 /// Separated small view for the duration
-private struct VideoDurationOverlay: View {
-    let movie: URL
-    @State private var duration: String = ""
-
-    var body: some View {
-        Text(duration)
-            .task {
-                do {
-                    duration = try await getVideoDuration(from: movie)
-                } catch {
-                    duration = ""
-                }
-            }
-    }
-}
+//private struct VideoDurationOverlay: View {
+//    let movie: URL
+//    @State private var duration: String = ""
+//
+//    var body: some View {
+//        Text(duration).underline(false)
+//            .task {
+//                do {
+//                    duration = try await getVideoDuration(from: movie)
+//                } catch {
+//                    duration = ""
+//                }
+//            }
+//    }
+//}

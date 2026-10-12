@@ -13,8 +13,8 @@ Little-Thing - учебное приложение для демонстраци
 
 ### Возможности
 
-* Перенос фото и видео из штатной системной фотогалереи.
-* Съемка и запись фото и видео с фотокамеры, запись в системную фотогалерею.
+* Перенос фото и видео из штатной системной фотогалереи в папку "Галерея".
+* Съемка и запись фото и видео с фотокамеры в минигалерею, запись в системную фотогалерею. Работает только на реальных устройствах и кроме Mac.
 * Редактирование подписей к объектам: по названию, цене, описанию.
 * Просмотр списка объектов, группирование, удаление, перенос в папку Избранное.
 * Сортировка по названию или цене в папке Избранное. Удаление из папки.
@@ -31,8 +31,8 @@ Little-Thing is an educational app designed to demonstrate how to build a custom
 
 ### Features
 
-*   Importing photos and videos from the system photo gallery.
-*   Capturing photos and recording videos using the camera and saving them to the system photo gallery.
+*   Importing photos and videos from the system photo gallery within the "Gallery" folder.
+*   Capturing photos and recording videos using the camera and saving them to the local mini gallery and system photo gallery.
 *   Editing item details: name, price, and description.
 *   Viewing the item list, grouping items, deleting items, and moving items to the "Favorites" folder.
 *   Sorting items by name or price within the "Favorites" folder; removing items from the folder.

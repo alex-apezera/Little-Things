@@ -26,10 +26,8 @@ struct LaunchScreen: View {
                             Text(String.launchInfo)
                             Text(String.launchInfo1)
                             Text(String.launchInfo2)
-                            if #available(iOS 17.0, *) {
-                                Text(String.launchInfo3)
-                                Text(String.launchInfo4)
-                            }
+                            Text(String.launchInfo3)
+                            Text(String.launchInfo4)
                             Text(String.launchInfoSaved)
                                 .padding(.top, 5)
                         }.padding(20)
@@ -38,7 +36,7 @@ struct LaunchScreen: View {
                     .foregroundStyle(.primary)
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 1))
                     .background(.thickMaterial)
-//                    .shadow(radius: 5)
+                    .shadow(radius: 5)
                     .cornerRadius(10)
                     
                     .onTapGesture {withAnimation {startApp = true}}

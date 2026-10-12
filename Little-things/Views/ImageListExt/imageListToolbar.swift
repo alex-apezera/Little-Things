@@ -32,15 +32,19 @@ extension ImageList {
                 }
             }
             
-            //MARK: - Call capturing photo
+            //MARK: - Call capturing photo (inactive for Mac)
             NavigationLink {
                 if enableVideo {
                     VideoContentView().environmentObject(dataModel)
                         .id(tabSelected)/// Force refresh content view
-                } else {                     CapturedPhotoView().environmentObject(dataModel)
+                } else {
+                    CapturedPhotoView().environmentObject(dataModel)
                 }
-            } label: { Image(systemName: enableVideo ? "video" : "camera") }
-                .disabled(isEditing || editMode == .active)
+            } label: {
+                Image(systemName: enableVideo ? "video" : "camera")
+            }
+            .disabled(isEditing || editMode == .active)
+            .disabled(isMacDesignedForIPad)
         }
 
         ToolbarItem(placement: .topBarLeading) {

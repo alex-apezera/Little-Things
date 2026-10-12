@@ -43,6 +43,7 @@
 		199AAA422DE1293100FFC2DF /* productSortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AAA412DE1293100FFC2DF /* productSortButton.swift */; };
 		199AAA442DE1DF9800FFC2DF /* VideoContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199AAA432DE1DF9800FFC2DF /* VideoContentButton.swift */; };
 		199F099D3076EB5000097F1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 199F099C3076EB5000097F1B /* README.md */; };
+		199F0B0D307D5CB800097F1B /* isMacOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F0B0C307D5CB800097F1B /* isMacOs.swift */; };
 		19B4228C2DB2C1C300C22D99 /* UsePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B4228B2DB2C1C300C22D99 /* UsePhoto.swift */; };
 		19BA300D2D9DD1BF00CFBB0A /* Aespa in Frameworks */ = {isa = PBXBuildFile; productRef = 19BA300C2D9DD1BF00CFBB0A /* Aespa */; };
 		19BA300F2D9DDFA500CFBB0A /* VideoContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BA300E2D9DDFA500CFBB0A /* VideoContentModel.swift */; };
@@ -139,6 +140,7 @@
 		199AAA412DE1293100FFC2DF /* productSortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productSortButton.swift; sourceTree = "<group>"; };
 		199AAA432DE1DF9800FFC2DF /* VideoContentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentButton.swift; sourceTree = "<group>"; };
 		199F099C3076EB5000097F1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		199F0B0C307D5CB800097F1B /* isMacOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isMacOs.swift; sourceTree = "<group>"; };
 		19B4228B2DB2C1C300C22D99 /* UsePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsePhoto.swift; sourceTree = "<group>"; };
 		19BA300E2D9DDFA500CFBB0A /* VideoContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentModel.swift; sourceTree = "<group>"; };
 		19BA30102D9DE09300CFBB0A /* VideoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContentView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				19BA30252DA8621D00CFBB0A /* dateString.swift */,
 				19BA30272DA86DCF00CFBB0A /* placemark.swift */,
 				196AC1D42DDE63C300D1434B /* aespaOff.swift */,
+				199F0B0C307D5CB800097F1B /* isMacOs.swift */,
 			);
 			path = CommonService;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				19BE05BA2D45218400F3210B /* ListModeToggle.swift in Sources */,
 				19F4A7DF2D2D4FEF00851966 /* EditText.swift in Sources */,
 				19F4A7D82D2C1D8900851966 /* ToolbarStatus.swift in Sources */,
+				199F0B0D307D5CB800097F1B /* isMacOs.swift in Sources */,
 				19BE05C52D46F2AF00F3210B /* imageListModeView.swift in Sources */,
 				19BA30132D9DE1EB00CFBB0A /* GalleryView.swift in Sources */,
 				19BA302A2DA871BF00CFBB0A /* storeImagesData.swift in Sources */,
@@ -814,7 +818,7 @@
 				INFOPLIST_FILE = "Little-things/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_MetalCaptureEnabled = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to capture photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "It is need to use camera";
 				INFOPLIST_KEY_NSLocationUsageDescription = Location;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Данное приложение использует микрофон.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This data will be use only in this App.";
@@ -828,7 +832,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -859,7 +863,7 @@
 				INFOPLIST_FILE = "Little-things/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_MetalCaptureEnabled = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to capture photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "It is need to use camera";
 				INFOPLIST_KEY_NSLocationUsageDescription = Location;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Данное приложение использует микрофон.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This data will be use only in this App.";
@@ -873,7 +877,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

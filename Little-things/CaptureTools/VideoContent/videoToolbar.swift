@@ -21,16 +21,17 @@ extension VideoContentView {
                 withAnimation {isCameraOff.toggle()}
                 if isCameraOff {aespaOff()}
                 else {
-                    tabSelected = 2
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {tabSelected = 0; dismiss()})
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                        tabSelected = 0
+                        ImageList().enableVideo = true
+                        dismiss()})
                 }
                     
             } label: {
-                if #available(iOS 17, *) {
-                    Image(systemName: isCameraOff ? "video" : "video.slash")
-                        .foregroundStyle(isCameraOff ? iPadDevice ? .blue : .clear : .green)
-                }
+                Image(systemName: isCameraOff ? "video" : "video.slash")
+                    .foregroundStyle(isCameraOff ? .blue  : .green)
             }
         }
     }
 }
+
