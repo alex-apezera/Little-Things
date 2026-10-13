@@ -14,7 +14,7 @@ func refreshImageUrls(for items: inout [Item]) {
     for url in urls {
         if let index = items.firstIndex(where: {$0.imageURL.lastPathComponent == url.lastPathComponent}) {
             items[index].imageURL = url
-//            print(#function, "Founded INDEX: \(index); URL: \(url)\n")
+            print(#function, "Founded INDEX: \(index); URL: \(url)\n")
         } else {
             print(#function, "NOT FOUND INDEX, URL: \(url)\n")
         }
@@ -29,7 +29,7 @@ func refreshObjectUrls(for items: [Object]) {
     for url in urls {
         if let index = items.firstIndex(where: {$0.imageURL.lastPathComponent == url.lastPathComponent}) {
             items[index].imageURL = url
-//            print(#function, "Founded INDEX: \(index); URL: \(url)\n")
+            print(#function, "Founded INDEX: \(index); URL: \(url)\n")
         } else {
             print(#function, "NOT FOUND INDEX, URL: \(url)\n")
         }

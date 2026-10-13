@@ -29,7 +29,7 @@ func storeDataObject(_ dataObject: [Item]) {
         // Save jsonData to a file
         try jsonData.write(to: dataModelURL)
         lastUpdatedObject = Date().timeIntervalSince1970
-//        print("\n", #function, "dataObject:", dataObject)
+        print("\n", #function, "dataObject:", dataObject.first!)
     } catch {
         print(#function, "Error encoding data: \(error)")
     }
@@ -44,7 +44,7 @@ func retrieveDataObject() -> [Item] {
         let jsonDecoder = JSONDecoder()
         let readingData = try jsonDecoder.decode([Item].self, from: jsonData)
         dataObject = readingData
-//        print("\n", #function, "dataObject:", dataObject, "\n")
+        print("\n", #function, "dataObject:", dataObject, "\n")
     } catch {
         print(#function, "Error decoding data: \(error)")
     }

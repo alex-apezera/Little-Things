@@ -12,7 +12,7 @@ extension FileManager {
     //MARK: - Path to store DataModel in FileManager
     static var dataModelURL: URL?  {
         let url = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.json")
-//        print("\n", #function, url ?? URL(string: "nil")!)
+        print("\n", #function, url ?? URL(string: "nil")!)
         return url
     }
     
@@ -20,7 +20,7 @@ extension FileManager {
 
     static func getDocumentsDirectory() -> URL {
         let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        print("\n", #function, paths.first!)
+        print("\n", #function, paths.first!)
         return paths.first!
     }
         
