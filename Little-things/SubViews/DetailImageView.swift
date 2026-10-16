@@ -47,6 +47,6 @@ struct DetailImageView: View {
             }
         }
         .padding(.horizontal, 10)
-        .navigationModifier("Фото + Описание")
+        .navigationModifier(forDetailView)
     }
 }

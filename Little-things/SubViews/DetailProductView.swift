@@ -43,7 +43,7 @@ struct DetailProductView: View {
             }
         }
         .padding(.horizontal, 10)
-        .navigationModifier("Избранное")
+        .navigationModifier(forDetailView)
     }
 }
 

@@ -46,15 +46,10 @@ struct ProductsList: View {
         default: return "\(count) Колонки"
         }
     }
-    var title: String {
-        if editMode == .inactive || selection.isEmpty {
-            return "Избранное"
-        } else {
-            return "Выбрано: \(selection.count)"
-        }
-    }
+
     var body: some View {
         VStack {
+            favoritesStatus
             if favoritesListMode {
                 productListMode
             } else {
@@ -68,8 +63,8 @@ struct ProductsList: View {
             restoreProductsFromDataModel
             productsCount = productsCounter
         }
+        .toolbar{productsToolbar}
         .environment(\.editMode, $editMode)
         .listStyle(.inset)
-        .toolbar{productsToolbar}
     }
 }

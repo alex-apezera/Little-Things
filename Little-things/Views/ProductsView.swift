@@ -23,6 +23,5 @@ struct ProductsView: View {
     var body: some View {
         ProductsList()
             .modelContainer(for: Object.self)
-            .navigationModifier("Избранное")
     }
 }

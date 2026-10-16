@@ -43,9 +43,9 @@ struct ImageList: View {
         }
     }
 
-    var title: String {
+    private var title: String {
         if editMode == .inactive || selection.isEmpty {
-            return "Галерея"
+            return "Галерея объектов"
         } else {
             return "Выбрано: \(selection.count)"
         }
@@ -53,7 +53,7 @@ struct ImageList: View {
 
     var body: some View {
         VStack {
-            
+            galleryStatus
             if listMode {
                 imageListModeView
             } else {

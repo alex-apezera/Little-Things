@@ -26,23 +26,29 @@ extension ProductsList {
             ListModeToggle(editMode: $editMode, listMode: $favoritesListMode, isEditing: $favoritesIsEdit)
         }
                 
-        ToolbarItemGroup(placement: .bottomBar) {
-            HStack {
-                productEditButton
-                Spacer()
-                ToolbarStatus(title: "всего объектов: ", lastUpdated: lastUpdatedProduct, count: productsCounter)
-                    .onTapGesture {productsCount = productsCounter}
-                Spacer()
-                VStack {
-                    if editMode == .active {
-                        DeleteButton(allObjects: false) {withAnimation{deleteProducts(for: selection)}}
-                            .disabled(selection.isEmpty)
-                    } else {
-                        DeleteButton(allObjects: true, action: withAnimation{markAllProductsAsNotFavorite})
-                            .disabled(productsCounter == 0)
-                    }
+//        ToolbarItemGroup(placement: .bottomBar) {
+//        }
+    }
+    
+    var favoritesStatus: some View {
+        HStack {
+            productEditButton
+            
+            Spacer()
+            ToolbarStatus(title: "всего объектов: ", lastUpdated: lastUpdatedProduct, count: productsCounter)
+                .onTapGesture {productsCount = productsCounter}
+            Spacer()
+            
+            VStack {
+                if editMode == .active {
+                    DeleteButton(allObjects: false) {withAnimation{deleteProducts(for: selection)}}
+                        .disabled(selection.isEmpty)
+                } else {
+                    DeleteButton(allObjects: true, action: withAnimation{markAllProductsAsNotFavorite})
+                        .disabled(productsCounter == 0)
                 }
             }
         }
+        .padding(.horizontal, 20)
     }
 }

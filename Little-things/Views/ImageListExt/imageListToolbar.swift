@@ -14,6 +14,13 @@ extension ImageList {
     
     @ToolbarContentBuilder
     var imageListToolbar: some ToolbarContent {
+        
+        ToolbarItem(placement: .topBarLeading) {
+            
+            //MARK: - Editing Mode
+            ListModeToggle(editMode: $editMode, listMode: $listMode, isEditing: $isEditing)
+        }
+
         ToolbarItemGroup(placement: .topBarTrailing) {
             
             //MARK: - Call ImagesPicker (variants)
@@ -47,27 +54,26 @@ extension ImageList {
             .disabled(isMacDesignedForIPad)
         }
 
-        ToolbarItem(placement: .topBarLeading) {
-            
-            //MARK: - Editing Mode
-            ListModeToggle(editMode: $editMode, listMode: $listMode, isEditing: $isEditing)
-        }
-
-        ToolbarItemGroup(placement: .bottomBar) {
+    }
+    
+    var galleryStatus: some View {
+        
+        HStack {
             imageEditButton
-
+            
             Spacer()
             ToolbarStatus(title: "всего объектов: ", lastUpdated: lastUpdatedObject, count: dataModel.items.count)
             Spacer()
             
             if editMode == .active {
                 DeleteButton(allObjects: false) { withAnimation{deleteImageObjects(for: selection)}}
-                .disabled(selection.isEmpty)
+                    .disabled(selection.isEmpty)
             } else {
                 DeleteButton(allObjects: true, action: withAnimation {dataModel.removeAllItems})
                     .disabled(dataModel.items.isEmpty)
             }
         }
+        .padding(.horizontal, 20)
     }
 }
 

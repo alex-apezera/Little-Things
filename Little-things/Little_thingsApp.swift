@@ -49,5 +49,6 @@ struct Little_thingsApp: App {
 
 let localeEnglish = "en"
 let localeRussian = "ru"
+let forDetailView = "Объекты с одинаковым названием"
 
 
