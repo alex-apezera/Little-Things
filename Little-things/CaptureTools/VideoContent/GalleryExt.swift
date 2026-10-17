@@ -5,7 +5,7 @@
 //  Created by Алексей Езерский on 09.04.2025.
 //
 
-import Aespa
+//import Aespa
 import SwiftUI
 import PhotosUI
 
@@ -13,18 +13,20 @@ extension GalleryView {
     
     private func messageManage() {
         showMessage = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {  withAnimation { showMessage = false } }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {  withAnimation { showMessage = false } }
     }
     
     func detailContent(with image: Image) -> some View {
         image
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
+            .frame(width: 125, height: 125)
             .clipped()
-            .cornerRadius(10)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(radius: 3)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(.thickMaterial, lineWidth: 1)
+                    .stroke(.white, lineWidth: 1)
             )
             .padding(.vertical, 2)
     }
@@ -65,7 +67,7 @@ extension GalleryView {
                     }
             }
         }
-        .showMessageInBox("Видео перемещаюся в галерею объектов в момент записи", showMessage)
+        .showMessageInBox("Видео уже в галерее объектов", showMessage)
         .padding(.leading, 5)
         .padding(.trailing, 5)
         .onAppear {viewModel.fetchVideoFiles()}

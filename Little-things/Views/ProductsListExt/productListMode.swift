@@ -34,8 +34,8 @@ extension ProductsList {
                     }
                 }
             }
-//            .onDelete(perform: deleteProducts)
-//            .onMove(perform: moveProducts)
+            .onDelete(perform: deleteProducts)
+            .onMove(perform: moveProducts)
         }
     }
 }

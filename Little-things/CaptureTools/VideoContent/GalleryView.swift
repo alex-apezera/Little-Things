@@ -28,7 +28,7 @@ struct GalleryView: View {
     }
     @AppStorage("jpegCompression") var jpegCompression: Double  = 1.0
     @State var fileImageCover: Image? = Image(systemName: "photo")
-    @State var menuSelection: Int = 0
+    @State var menuSelection: Int = 1
     @State var showDetailView: Bool = false
     @State var showMessage: Bool = false
     @AppStorage("galleryColumns") var galleryColumns = 3
@@ -55,7 +55,8 @@ struct GalleryView: View {
             .padding(.top, 5)
             .pickerStyle(.segmented)
             
-            if menuSelection == 3 {/// Select  media files to delete from library
+            // Select  media files to delete from library
+            if menuSelection == 3 {
                 switch mediaType {
                 case .video: selectObjectsToDelete("Выбрать видео из библиотеки", .videos)
                 case .photo: selectObjectsToDelete("Выбрать фото из библиотеки", .images)
@@ -71,7 +72,18 @@ struct GalleryView: View {
         }
         .background(.thinMaterial)
         .sheet(isPresented: $showDetailView) {
-            if let fileImageCover { detailContent(with: fileImageCover) }
+            if let fileImageCover {
+                switch mediaType {
+                case .video:
+                    Text("Просмотр видео доступен в Галерее").font(.footnote).padding(5)
+                case .photo:
+                    Text("Просмотр фото")
+                        .font(.footnote).padding(5)
+                }
+                GesturedImage(image: fileImageCover)
+            }
         }
+        .id(showDetailView)
+
     }
 }
