@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 extension ProductsList {
     
+    /// Grid mode view of the favorite media files.
+    ///
     var productGridMode: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: gridColumns) {

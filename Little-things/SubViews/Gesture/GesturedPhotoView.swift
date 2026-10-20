@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Call gesture viewer
+///
 struct GesturedPhotoView: View {
     let size: Double
     let url: URL

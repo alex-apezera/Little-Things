@@ -13,6 +13,9 @@ enum AssetType {
     case photo
 }
 
+/// View of capture a video/photo
+///
+/// Include  mini gallery button, camera shutter release and settings
 struct VideoContentView: View {
     @State var isRecording = false
     @State var isFront = false
@@ -70,9 +73,7 @@ struct VideoContentView: View {
         .navigationModifier(isCameraOff ? "Камера выключена" : "Режим видео- и фотосъёмки")
         .toolbar { videoToolbar }
         .cameraOff
-        .onChange(of: tabSelected) {
-            dismiss()
-        }
+        .onChange(of: tabSelected) { dismiss() }
     }
 }
 

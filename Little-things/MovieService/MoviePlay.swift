@@ -8,8 +8,8 @@
 import SwiftUI
 import AVKit
 
-//MARK: - VideoPlayer
-
+/// VideoPlayer
+///
 struct MoviePlay: View {
     
     let size: CGFloat

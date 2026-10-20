@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+/// Initializator for Data ModelContainer of the favorite products.
+///
 @available(iOS 17.0, *)
 struct ProductsView: View {
     

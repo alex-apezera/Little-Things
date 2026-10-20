@@ -8,6 +8,7 @@
 import SwiftUI
 
 /// `Button` Toggle  isFavorite property and perform closure action
+///
 struct IsFavoriteToggle: View {
     @Binding var isFavorite: Bool
     var action: () -> Void = {}

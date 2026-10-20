@@ -21,10 +21,14 @@ let iPadDevice: Bool = UIDevice.current.userInterfaceIdiom == .pad
 ///
 var scaleOfPhoto = iPadDevice ? 0.6 : 0.85
 
+///Message for a detail view of the mini gallery
+///
+let forDetailView = "Объекты с одинаковым названием"
+
 ///App localized for `Russian`
 ///
 ///It selects photo or video from user Photos library with metadata and allows its to play and to edit metadata.
-///It also includes the ability capture video/photo, and (later iOS 17) mark its favorites.
+///It also includes the ability capture video/photo, and (later iOS 17) mark its favorites. This works only on the real physical devices.
 @main
 struct Little_thingsApp: App {
     @State var startApp: Bool = false
@@ -49,6 +53,4 @@ struct Little_thingsApp: App {
 
 let localeEnglish = "en"
 let localeRussian = "ru"
-let forDetailView = "Объекты с одинаковым названием"
-
 

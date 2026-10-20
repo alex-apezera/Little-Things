@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 extension ProductsList {
     
+    /// List mode view for the favorite media files with description
+    ///
     var productListMode: some View {
         
         List(selection: $selection) {

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// This is false on a real device to avoid  aespa session crash.
+///
 var isMacDesignedForIPad: Bool {
     #if targetEnvironment(macCatalyst)
     return true

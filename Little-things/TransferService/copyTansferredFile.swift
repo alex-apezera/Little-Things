@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Copy reseived file to url
+///
 public func copyTransferredFile(_ received: ReceivedTransferredFile) -> URL {
     @AppStorage("copyFile") var copyFile: URL = URL(fileURLWithPath: "")
 

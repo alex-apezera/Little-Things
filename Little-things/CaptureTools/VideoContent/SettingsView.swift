@@ -12,6 +12,8 @@
 import SwiftUI
 import AVFoundation
 
+/// Settings for the photo/video session
+///
 struct SettingView: View {
     @ObservedObject var viewModel: VideoContentViewModel
 

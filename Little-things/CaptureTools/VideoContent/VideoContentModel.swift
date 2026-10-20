@@ -7,10 +7,11 @@
 
 import Combine
 import SwiftUI
-import Foundation
 
 @preconcurrency import Aespa
 
+/// Photo-video session tuning
+///
 class VideoContentViewModel: ObservableObject, @unchecked Sendable {
     let aespaSession: AespaSession
     
@@ -120,16 +121,16 @@ class VideoContentViewModel: ObservableObject, @unchecked Sendable {
             .store(in: &subscription)
     }
 
+    /// File fetching task can cause low reponsiveness when called from main thread
     func fetchVideoFiles() {
-        // File fetching task can cause low reponsiveness when called from main thread
         Task(priority: .utility) {
             let fetchedFiles = await aespaSession.fetchVideoFiles()
             DispatchQueue.main.async { self.videoFiles = fetchedFiles }
         }
     }
     
+    /// File fetching task can cause low reponsiveness when called from main thread
     func fetchPhotoFiles() {
-        // File fetching task can cause low reponsiveness when called from main thread
         Task(priority: .utility) {
             let fetchedFiles = await aespaSession.fetchPhotoFiles()
             DispatchQueue.main.async { self.photoFiles = fetchedFiles }
@@ -139,7 +140,9 @@ class VideoContentViewModel: ObservableObject, @unchecked Sendable {
 
 
 extension VideoContentViewModel {
-    // Example for using custom session tuner
+    
+    /// Example for using custom session tuner
+    ///
     struct WideColorCameraTuner: AespaSessionTuning {
         func tune<T>(_ session: T) throws where T : AespaCoreSessionRepresentable {
             session.avCaptureSession.automaticallyConfiguresCaptureDeviceForWideColor = true

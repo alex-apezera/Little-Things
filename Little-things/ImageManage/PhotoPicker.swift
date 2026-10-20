@@ -8,6 +8,8 @@
 import SwiftUI
 import PhotosUI
 
+/// Pick an image from the user Photolibrary
+///
 struct PhotoPicker: UIViewControllerRepresentable {
 
     @EnvironmentObject var dataModel: DataModel
@@ -41,6 +43,8 @@ struct PhotoPicker: UIViewControllerRepresentable {
         // No updates are necessary.
     }
     
+    /// Call a delegate protocol for Picker
+    ///
     class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
         let parent: PhotoPicker
         init(_ parent: PhotoPicker) {
@@ -54,7 +58,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
             self.parent.dismiss()
             parent.presentationMode.wrappedValue.dismiss()
             
-            /// Outside call:
+            /// Outside call: (only for separate View, not NavigationLink)
 //PhotoPicker.Coordinator(PhotoPicker()).parent.dismiss()
 //PhotoPicker.Coordinator(PhotoPicker()).parent.presentationMode.wrappedValue.dismiss()
             

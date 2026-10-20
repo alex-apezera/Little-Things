@@ -4,10 +4,12 @@
 //
 //  Created by Алексей Езерский on 06.01.2025.
 //
+// MARK: - ViewModifiers.
 
 import SwiftUI
 
-///Terminates video session and turns camera off
+///Terminates video session and turns camera off.
+///
 struct CameraOff: ViewModifier {
     
     func body(content: Content) -> some View {
@@ -16,7 +18,8 @@ struct CameraOff: ViewModifier {
     }
 }
 
-/// show  `message` in a box
+/// Show  `message` in a box.
+///
 struct ShowMessage: ViewModifier {
     let message: String
     let showMessage: Bool
@@ -32,9 +35,8 @@ struct ShowMessage: ViewModifier {
     }
 }
 
-
-//MARK: - Navigation bar modifier
-
+/// Navigation bar modifier.
+///
 struct NavigationModifier: ViewModifier {
     let title: String
     func body(content: Content) -> some View {
@@ -46,8 +48,8 @@ struct NavigationModifier: ViewModifier {
     }
 }
 
-//MARK: - Image cell & grid
-
+/// Images cell modifier.
+///
 struct ImageCellModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -56,6 +58,9 @@ struct ImageCellModifier: ViewModifier {
             .shadow(radius: 5)
     }
 }
+
+/// Images cell modifier.
+///
 struct ImageGridModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -65,8 +70,8 @@ struct ImageGridModifier: ViewModifier {
     }
 }
 
-//MARK: - TextField
-
+/// TextField modifier.
+///
 struct TextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content

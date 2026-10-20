@@ -10,12 +10,13 @@ import PhotosUI
 
 extension ImageList {
 
-    /// Fetches metadata of  picked items (photos or videos)  from a photolibrary.
+    /// Fetches metadata of picked items (photos or videos)  from a photolibrary.
     ///
     /// This method provides name, creation date, address for each item.
     ///
     /// - Parameter:
     /// Array of picked items, called from `PhotosPicker`.
+    ///
     func getImagesData(from newItems: [PhotosPickerItem]) async throws {
   
         for item in newItems {
@@ -36,7 +37,7 @@ extension ImageList {
                 }
                  */
                 
-                /// Date of captuting photo
+                /// Date of the captuting photo
                 if let imageDate = result.firstObject?.creationDate {
                     metaData.price = dateString(for: imageDate)
                 }
@@ -62,14 +63,14 @@ extension ImageList {
             guard let documentDirectory = FileManager().documentDirectory else {return}
             copyFile = documentDirectory.appendingPathComponent("\(metaData.id)")
 
-            /// Try import images or videos from Photolibrary depending on item
+            /// Try import images or videos from Photolibrary depending on the item
             if let photo = try? await item.loadTransferable(type: Photo.self) {
                 metaData.imageURL = photo.url
             }
             if let movie = try? await item.loadTransferable(type: Movie.self) {
                 metaData.imageURL = movie.url
             }
-            // Insert reseived or default metadata to array of items
+            /// Insert reseived or default metadata to array of items
             withAnimation {
                 dataModel.addItem(metaData)
             }

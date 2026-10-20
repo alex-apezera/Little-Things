@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-/// Use photo image for store in App gallery
+
+/// Use captured photo image for store in App gallery
+///
 struct UsePhoto {
     @AppStorage("jpegCompression") var jpegCompression: Double  = 1.0
     @ObservedObject var dataModel: DataModel

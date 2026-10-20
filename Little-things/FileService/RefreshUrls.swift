@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Refresh the gallery file urls in the document directory
+///
 func refreshImageUrls(for items: inout [Item]) {
     guard let documentDirectory = FileManager.default.documentDirectory else { return }
     let urls = FileManager.default.getContentsOfDirectory(documentDirectory).filter { [$0.isImage, $0.isVideo].contains(true) }
@@ -20,6 +22,9 @@ func refreshImageUrls(for items: inout [Item]) {
         }
     }
 }
+
+/// Refresh the favorite file urls in the document directory
+///
 @available(iOS 17.0, *)
 func refreshObjectUrls(for items: [Object]) {
     //    if let documentDirectory = FileManager.default.documentDirectory {

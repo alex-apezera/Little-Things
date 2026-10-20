@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Move action for the item
+///
 struct MoveItem: View {
     var action: () -> Void = {}
     var body: some View {

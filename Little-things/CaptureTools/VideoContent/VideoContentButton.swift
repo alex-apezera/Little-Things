@@ -38,7 +38,7 @@ extension VideoContentView {
         }
     }
     
-    /// Album thumbnail + button
+    /// Calls Album thumbnail (minigallery)
     ///
     var albumButton: some View {
         Button(action: { showGallery = true }) {
@@ -53,7 +53,7 @@ extension VideoContentView {
         .contentShape(Rectangle())
     }
     
-    /// Camera position change + button
+    /// Calls Camera position change
     ///
     var cameraPositionButton: some View {
         Button(action: {
@@ -72,7 +72,7 @@ extension VideoContentView {
         .contentShape(Rectangle())
     }
     
-    /// Shutter + button
+    /// Camera shutter release
     ///
     var recordingButton: some View {
         recordingButtonShape(width: 60).onTapGesture {

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Import a movie as a transferred file
+///
 struct Movie: Transferable {
     let url: URL
 

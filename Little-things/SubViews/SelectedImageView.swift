@@ -5,10 +5,10 @@
 //  Created by Алексей Езерский on 30.12.2024.
 //
 
-//MARK: - Show image from url
-
 import SwiftUI
 
+/// Show an image from url
+///
 struct SelectedImageView: View {
     let size: Double
     let url: URL

@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// Main settings of the App.
+///
+/// This stored for the next App session.
 struct Settings: View {
     let title: String
     @AppStorage("onlyPhotoSelection") var onlyPhotoSelection = true
@@ -21,9 +24,13 @@ struct Settings: View {
     var body: some View {
         List {
             Section(header: Text("Режим выбора медиафайлов")) {
-                Toggle("Только фото без данных", isOn: $onlyPhotoSelection)
+                Text("При выключенном режиме доступны медиафайлы с данными")
+                    .font(.caption2).foregroundStyle(.secondary)
+                Toggle("Только фото (без данных)", isOn: $onlyPhotoSelection)
             }
             Section(header: Text("Режим съёмки видео")) {
+                Text("При включенном режиме также работает минигалерея")
+                    .font(.caption2).foregroundStyle(.secondary)
                 Toggle(enableVideo ? "Включен":"Выключен", isOn: $enableVideo)
             }
             Section(header: Text("Сохранение результатов съёмки")) {

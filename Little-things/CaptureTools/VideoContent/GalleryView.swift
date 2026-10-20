@@ -13,6 +13,8 @@ import Aespa
 import SwiftUI
 import PhotosUI
 
+/// Mini gallery view (Album thumbnail)
+///
 struct GalleryView: View {
     @ObservedObject var viewModel: VideoContentViewModel
     @EnvironmentObject var dataModel: DataModel

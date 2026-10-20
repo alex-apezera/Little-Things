@@ -8,8 +8,12 @@
 import SwiftUI
 import SwiftData
 
+/// View of favorite media files wich imported from the current Gallery.
+///
+/// This include the sort mechanism by name or price.
 @available(iOS 17.0, *)
 struct ProductsList: View {
+    
     @EnvironmentObject var dataModel: DataModel
     @AppStorage("favoritesIsEdit") var favoritesIsEdit: Bool = false
     @State var addFavorites: Bool = false

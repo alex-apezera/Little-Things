@@ -11,6 +11,7 @@ import SwiftUI
 extension VideoContentView {
     
     /// Stores video file in `ImageList` Gallery
+    ///
     func storeVideoToGallery(file: VideoFile) {
         let id = randomString(length: idLength)
         if let savedUrl = FileManager.default.copyItemToDocumentDirectory(from: file.path ?? URL(fileURLWithPath: ""), to: id) {
@@ -27,6 +28,7 @@ extension VideoContentView {
     }
     
     /// Shows cell as `Button` with photo or first frame of video
+    ///
     @ViewBuilder
     func roundRectangleShape(with image: Image, size: CGFloat) -> some View {
         image
@@ -43,6 +45,7 @@ extension VideoContentView {
     }
     
     /// Use `Button` for recording video or capture photo
+    /// 
     @ViewBuilder
     func recordingButtonShape(width: CGFloat) -> some View {
         ZStack {

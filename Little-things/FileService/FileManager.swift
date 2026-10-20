@@ -9,15 +9,16 @@ import Foundation
 
 extension FileManager {
     
-    //MARK: - Path to store DataModel in FileManager
+    /// Path to store DataModel in FileManager
+    ///
     static var dataModelURL: URL?  {
         let url = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.json")
         print("\n", #function, url ?? URL(string: "nil")!)
         return url
     }
     
-    //MARK: - Create new folder for photo objects files
-
+    ///Create new folder for photo objects files
+    ///
     static func getDocumentsDirectory() -> URL {
         let paths = self.default.urls(for: .documentDirectory, in: .userDomainMask)
         print("\n", #function, paths.first!)
@@ -25,7 +26,9 @@ extension FileManager {
     }
         
     //MARK: - Property and methods for Image Gallery
+    
     /// The URL of the document directory.
+    ///
     var documentDirectory: URL? {
         return self.urls(for: .documentDirectory, in: .userDomainMask).first
     }
@@ -84,6 +87,7 @@ extension FileManager {
     }
     
     /// Returns the contents of the specified directory as an array of URLs.
+    ///
     func getContentsOfDirectory(_ url: URL) -> [URL] {
         var isDirectory: ObjCBool = false
         // The URL must be a directory.

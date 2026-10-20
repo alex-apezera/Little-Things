@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Protocol for capture photo
+///
 struct CapturePhoto: UIViewControllerRepresentable {
     
     private var sourceType: UIImagePickerController.SourceType = .camera

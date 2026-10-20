@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Date fomatter string.
+/// 
 func dateString(for date: Date?) -> String {
 
     // Create Date

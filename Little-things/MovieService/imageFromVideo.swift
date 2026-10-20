@@ -29,6 +29,9 @@ import AVFoundation
 //    return UIImage(cgImage: thumbnailImageRef)
 //}
 
+/// Convert video frame to uiimage.
+///
+/// Make sure to call this from background queue
 public func imageFromVideo(url: URL, at time: TimeInterval) async throws -> UIImage? {
     let asset = AVURLAsset(url: url)
     let generator = AVAssetImageGenerator(asset: asset)

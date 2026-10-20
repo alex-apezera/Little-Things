@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Detail view of the gallery object(s) with specification
+///
 struct DetailImageView: View {
     @State var item: Item
     @EnvironmentObject var dataModel: DataModel

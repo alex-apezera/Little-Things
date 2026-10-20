@@ -9,9 +9,10 @@ import _PhotosUI_SwiftUI
 
 extension ImageList {
     
-    ///Gets and stores metadata in json file
+    /// Metadata will gets from  Photolibrary and will stores in json file(s).
     ///
-    /// - Parameter: array of `PhotosPicker` items
+    /// - Parameter: array of `PhotosPicker` items.
+    ///
     func storeImagesData(_ items: [PhotosPickerItem]) {
         Task {
             do {
@@ -23,7 +24,7 @@ extension ImageList {
                 isLoading = false
                 // Elimination duplication when re-entering to PhotosPicker
                 selectedItems.removeAll()
-                // Refresh date of Loading
+                // Refresh the date then loadind
                 lastUpdatedObject = Date().timeIntervalSince1970
             } catch {
                 print("\n", #function, "Error: \(error)")

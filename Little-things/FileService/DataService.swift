@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-// MARK: - DataModel store, retrieve, remove
+// MARK: - Manage for the object data model file
 
+/// Remove file from document directory
+///
 func clearDataModel() {
     guard let dataModelURL = FileManager.dataModelURL else {return}
     do {
@@ -19,6 +21,8 @@ func clearDataModel() {
     }
 }
 
+///Store file to document directory
+///
 func storeDataObject(_ dataObject: [Item]) {
     @AppStorage("lastUpdatedObject")
     var lastUpdatedObject = Date.distantFuture.timeIntervalSince1970
@@ -35,6 +39,8 @@ func storeDataObject(_ dataObject: [Item]) {
     }
 }
 
+/// Retrieve file from document directory
+///
 func retrieveDataObject() -> [Item] {
     var dataObject = [Item]()
     guard let dataModelURL = FileManager.dataModelURL else {return []}

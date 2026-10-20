@@ -8,6 +8,8 @@
 import SwiftUI
 extension ImageList {
     
+    /// Button for manage the media files in current gallery
+    ///
     var imageEditButton: some View {
         Button {
             withAnimation {

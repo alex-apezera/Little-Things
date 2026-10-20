@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-// Display corresponding methods for representation file
+
+/// Select corresponding methods for representation file
+///
 struct SelectedFileView: View {
     let size: Double
     let url: URL

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Presentation for  capture a photo
+///
 struct CapturedPhotoView: View {
     @EnvironmentObject private var dataModel: DataModel
     @State private var image: Image?

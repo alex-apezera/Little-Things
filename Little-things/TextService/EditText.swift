@@ -7,13 +7,14 @@
 
 import SwiftUI
 
+/// Inputs a new text.
+///
 struct EditText: View {
     @Binding var editText: Bool
     @Binding var text: String
     let title: String
     let prompt: String
     
-//MARK: - Input new text
     var body: some View {
         VStack {
             Text(title).opacity(0.5)

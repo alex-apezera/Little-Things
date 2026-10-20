@@ -8,7 +8,8 @@
 import SwiftUI
 import PhotosUI
 
-/// Gallery view of media files with associated data model items
+/// Gallery view of media files with associated data model items.
+///
 struct ImageList: View {
     @EnvironmentObject var dataModel: DataModel
     @AppStorage("isEditing") var isEditing = false

@@ -7,13 +7,14 @@
 
 import SwiftUI
 
+/// Custom TextField with Alert.
+///
 struct UserTextField: View {
     
     let prompt: String
     @Binding var text: String
     @State var showAlert: Bool = false
     
-//MARK: UserTextField with Alert
     var body: some View {
         TextField(prompt, text: $text) {isChanged in
             let incorrectCharacters = notAllowedCharacters(in: text)

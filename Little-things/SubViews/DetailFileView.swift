@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Presentation for the photo or video
+///
 struct DetailFileView: View {
     let size: CGFloat
     let url: URL

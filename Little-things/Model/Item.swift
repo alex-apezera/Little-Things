@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// An item for data object
+///
 struct Item: Identifiable, Codable {
 
     var id: String

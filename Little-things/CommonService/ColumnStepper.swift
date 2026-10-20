@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Set the columns number  in main gallery and favorites gallery.
+///
 struct ColumnStepper: View {
     let title: String
     let range: ClosedRange<Int>

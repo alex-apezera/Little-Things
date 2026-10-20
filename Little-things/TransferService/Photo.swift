@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Import an image as a transferred file
+///
 struct Photo: Transferable {
     let url: URL
     

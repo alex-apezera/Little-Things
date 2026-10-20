@@ -8,10 +8,10 @@
 import CoreLocation
 import Contacts
 
-//MARK: - Fetch data from Map location
-
 extension CLLocation {
     
+    /// Fetch data from Map location.
+    ///
     func placemark(completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
         CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first, $1) }
     }

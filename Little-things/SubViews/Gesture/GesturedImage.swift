@@ -3,11 +3,12 @@
 //  Slider-Player
 //
 //  Created by Алексей Езерский on 11.11.2023.
-
-//MARK: - Gesture experience with image
+//
 
 import SwiftUI
 
+/// Gesture experience with an image
+///
 struct GesturedImage: View {
     let image: Image
     @Environment(\.dismiss) private var dismiss

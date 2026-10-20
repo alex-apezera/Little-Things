@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Call editing the object description
+///
 struct ObjectDescription: View {
     @Binding var isPresented: Bool
     @Binding var property: String
@@ -30,6 +32,8 @@ struct ObjectDescription: View {
     }
 }
 
+/// Show the object description
+///
 struct SimpleDescription: View {
     let property: String
     let title: String

@@ -7,7 +7,8 @@
 
 import AVFoundation
 
-/// video duration stamp on firstFrame
+/// Video duration stamp on  a firstFrame image.
+///
 public func getVideoDuration(from path: URL) async throws -> String {
     let asset = AVURLAsset(url: path)
     let duration: CMTime = try await asset.load(.duration)

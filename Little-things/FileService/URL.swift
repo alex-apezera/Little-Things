@@ -9,6 +9,8 @@ import SwiftUI
 
 extension URL {
     
+    /// Data model url
+    ///
     static var dataModel = FileManager.default.documentDirectory?.appendingPathComponent("dataModel.json")
 
     // Convert and store uiimage to URL
@@ -24,7 +26,8 @@ extension URL {
         }
     }
     
-    // Retrieve uiimage from URL
+    /// Retrieve uiimage from URL
+    ///
     func loadUIImage(_ uiimage: inout UIImage?) {
         if let data = try? Data(contentsOf: self), let loaded = UIImage(data: data) {
             uiimage = loaded
@@ -34,12 +37,13 @@ extension URL {
         }
     }
     
-    // Indicates whether the URL has a file extension corresponding to a common image format. Use in Image Gallery.
+    /// Indicates whether the URL has a file extension corresponding to a common image format. Is used in Image Gallery.
     var isImage: Bool {
         let imageExtensions = ["jpg", "jpeg", "png", "gif", "heic"]
         return imageExtensions.contains(self.pathExtension)
     }
     
+    /// Indicates whether the URL has a file extension corresponding to a common video format. Is used in Image Gallery.
     var isVideo: Bool {
         let videoExtensions: Set<String> = ["mp4", "mov", "avi", "mkv", "webm"]
         return videoExtensions.contains(self.pathExtension)

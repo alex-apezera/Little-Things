@@ -5,17 +5,20 @@
 //  Created by Алексей Езерский on 09.04.2025.
 //
 
-//import Aespa
 import SwiftUI
 import PhotosUI
 
 extension GalleryView {
     
+    /// Disappearing message
+    ///
     private func messageManage() {
         showMessage = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {  withAnimation { showMessage = false } }
     }
     
+    /// Thumbnail image of the photo or the first video frame
+    ///
     func detailContent(with image: Image) -> some View {
         image
             .resizable()
@@ -31,8 +34,10 @@ extension GalleryView {
             .padding(.vertical, 2)
     }
 
+    /// Mini gallery of photos with actions
+    ///
     var photoGallery: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: 100, maximum: 200)), count: galleryColumns), spacing: 2) {
+        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: 100, maximum: 200)), count: galleryColumns), spacing: 5) {
             ForEach(viewModel.photoFiles) { file in
                 detailContent(with: file.image)
                     .onTapGesture {
@@ -52,6 +57,8 @@ extension GalleryView {
         .onAppear {viewModel.fetchPhotoFiles()}
     }
     
+    /// Mini gallery of the first video frames with actions
+    ///
     var videoGallery: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: 100, maximum: 200)), count: galleryColumns), spacing: 2) {
             ForEach(viewModel.videoFiles) { file in
@@ -73,6 +80,8 @@ extension GalleryView {
         .onAppear {viewModel.fetchVideoFiles()}
     }
     
+    /// Delete action for the thumbnail
+    ///
     func selectObjectsToDelete(_ message: String, _ type: PHPickerFilter) -> some View {
         PhotosPicker(message, selection: $photosPickerItems, matching: type, photoLibrary: .shared())
             .onChange(of: photosPickerItems) { _, items in

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-//MARK: - List/Grid mode toggle
+/// List/Grid mode toggle action
+///
 struct ListModeToggle: View {
     @Binding var editMode: EditMode
     @Binding var listMode: Bool
@@ -20,7 +21,7 @@ struct ListModeToggle: View {
             isEditing = false
             editMode = .inactive
         } label: {
-            Image(systemName: !listMode ? "square.fill.text.grid.1x2" : "square.grid.3x2")
+            Image(systemName: !listMode ? "square.fill.text.grid.1x2" : "square.grid.3x3.fill")
         }
     }
 }

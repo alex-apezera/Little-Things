@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-/// Use this as to call image in Gallery
-@ViewBuilder
+/// Use this as to call a first frame video.
+///
+/// Include separated small view for the duration stamp.
 public func firstFrame(_ size: CGFloat, _ movie: URL) -> some View {
     FirstFrameView(size: size, movie: movie)
 }

@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 extension ProductsList {
     
+    /// Toolbar for add and sort the media files in favorites gallery
+    ///
     @ToolbarContentBuilder
     var productsToolbar: some ToolbarContent {
   
@@ -26,10 +28,10 @@ extension ProductsList {
             ListModeToggle(editMode: $editMode, listMode: $favoritesListMode, isEditing: $favoritesIsEdit)
         }
                 
-//        ToolbarItemGroup(placement: .bottomBar) {
-//        }
     }
     
+    /// Status bar of the favorites gallery
+    ///
     var favoritesStatus: some View {
         HStack {
             productEditButton

@@ -7,6 +7,8 @@
 
 import PhotosUI
 
+/// Write and delete methods for the image to/from the user Photolibrary
+
 class ImageManager: NSObject {
     
     ///Как сохранить изображения в библиотеке фотографий пользователя
@@ -23,7 +25,7 @@ class ImageManager: NSObject {
         }
     }
     
-///https://stackoverflow.com/questions/75983606/delete-photo-after-selection
+    ///https://stackoverflow.com/questions/75983606/delete-photo-after-selection
     
     func deleteItemFromLibrary(assetIdentifier: String) {
         

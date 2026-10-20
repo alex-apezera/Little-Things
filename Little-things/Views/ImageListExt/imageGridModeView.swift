@@ -9,6 +9,8 @@ import SwiftUI
 
 extension ImageList {
     
+    /// Grid mode view for the media files
+    ///
     var imageGridModeView: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: gridColumns) {

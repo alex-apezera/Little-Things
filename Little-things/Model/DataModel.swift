@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Manage for items from data collection and urls from document directory
+///
 final class DataModel: ObservableObject {
     @Published var items: [Item] = []
 
@@ -42,7 +44,6 @@ final class DataModel: ObservableObject {
                 FileManager.default.removeFileFromDocumentDirectory(url: url)
             }
             print("URLs DELETED FROM DOCUMENT DIRECTORY: \(urls)")
-//        }
         items.removeAll()
         clearDataModel() /// Delete dataModel.json file
     }

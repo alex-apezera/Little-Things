@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
+
 ///Main view with menu selection in `TabView`
+///
 struct TabSelection: View {
                    
     @AppStorage("tabSelected") var tabSelected = 0

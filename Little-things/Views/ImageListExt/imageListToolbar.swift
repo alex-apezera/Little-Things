@@ -10,36 +10,36 @@ import PhotosUI
 
 extension ImageList {
         
-//MARK: - Refresh and Show Image Gallery
-    
+    /// Toolbar for refresh and show the media files in current gallery
+    ///
     @ToolbarContentBuilder
     var imageListToolbar: some ToolbarContent {
         
         ToolbarItem(placement: .topBarLeading) {
-            
-            //MARK: - Editing Mode
             ListModeToggle(editMode: $editMode, listMode: $listMode, isEditing: $isEditing)
         }
 
         ToolbarItemGroup(placement: .topBarTrailing) {
-            
-            //MARK: - Call ImagesPicker (variants)
             if onlyPhotoSelection {
-                NavigationLink { PhotoPicker()
-                        .environmentObject(dataModel)
-                } label: { Image(systemName: "photo") }
+                NavigationLink {
+                    Text("Выбрать фото (без данных)")
+                    PhotoPicker()
+                    .environmentObject(dataModel)
+                } label: { Image(systemName: "plus.square") }
                 .disabled(isEditing || editMode == .active) }
             else {
                 PhotosPicker(selection: $selectedItems, photoLibrary: .shared()) {
                     if isLoading {
                         ProgressView()
                     } else {
-                        Image(systemName: "photo.stack")
+                        Image(systemName: "plus.square.on.square")
                     }
                 }
             }
             
-            //MARK: - Call capturing photo (inactive for Mac)
+            /// Call capturing photo or video (inactive for Mac)
+            /// Mini gallery is active then the video is enable in the Settings
+            ///
             NavigationLink {
                 if enableVideo {
                     VideoContentView().environmentObject(dataModel)
@@ -56,6 +56,8 @@ extension ImageList {
 
     }
     
+    /// Status bar of the current gallery
+    ///
     var galleryStatus: some View {
         
         HStack {

@@ -8,7 +8,9 @@
 import SwiftUI
 
 extension ImageList {
-    //MARK: - Delete functions
+    
+    /// Delete url object from Gallery directory and update Data model.
+    ///
     func deleteImageObjects(at offsets: IndexSet) {
         var imageObjects = dataModel.items
         for index in offsets {
@@ -19,6 +21,9 @@ extension ImageList {
         storeDataObject(imageObjects)
         dataModel.items = retrieveDataObject() /// Refresh DataModel
     }
+    
+    /// Delete objects by index.
+    ///
     func deleteImageObjects(for codes: Set<String>) {
         let imageObjects = dataModel.items
         var offsetsToDelete: IndexSet = []
@@ -30,7 +35,9 @@ extension ImageList {
         deleteImageObjects(at: offsetsToDelete)
         selection.removeAll()
     }
-    //MARK: - Move Object
+    
+    /// Move objects by index.
+    ///
     func moveImageObjects(source: IndexSet, destination: Int) {
         var imageObjects = dataModel.items
         imageObjects.move(fromOffsets: source, toOffset: destination)

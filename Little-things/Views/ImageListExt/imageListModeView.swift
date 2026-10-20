@@ -9,6 +9,8 @@ import SwiftUI
 
 extension ImageList {
     
+    /// List mode view for the media files with description
+    ///
     var imageListModeView: some View {
         List(selection: $selection) {
             ForEach(dataModel.items) { item in

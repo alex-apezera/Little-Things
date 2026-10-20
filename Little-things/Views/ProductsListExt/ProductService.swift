@@ -4,12 +4,15 @@
 //
 //  Created by Алексей Езерский on 10.01.2025.
 //
+// Manage of the favorite objects (products).
+//
 
 import SwiftUI
 import SwiftData
+
 @available(iOS 17.0, *)
 extension ProductsList {
-    
+   
     func saveContext() {
         do {
             try modelContext.save()
@@ -36,19 +39,19 @@ extension ProductsList {
     }
     
     func deleteProducts(at offsets: IndexSet) {
-//        var favorites = objects
+        var favorites = objects
         for index in offsets {
             withAnimation {
                 dataModel.items[index].isFavorite = false
-//                modelContext.delete(favorites[index])
+                modelContext.delete(favorites[index])
             }
         }
         storeDataObject(dataModel.items)
         productsCount = productsCounter
         lastUpdatedProduct = Date().timeIntervalSince1970
 
-//        favorites.remove(atOffsets: offsets)
-//        saveContext()
+        favorites.remove(atOffsets: offsets)
+        saveContext()
     }
     
     func moveProducts(source: IndexSet, destination: Int) {
@@ -121,7 +124,7 @@ extension ProductsList {
                 imageURL: item.imageURL
             )
             addProduct(newProduct)
-//            print("\n", #function, "ITEM: \(item)")
+            print("\n", #function, "ITEM: \(item)")
         }
     }
 }

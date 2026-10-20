@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+/// SwiftData model for an object
+///
 @available(iOS 17.0, *)
 @Model
 final class Object: Identifiable {

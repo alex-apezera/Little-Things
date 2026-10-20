@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+
+/// Detail view of the favorite object(s) with specification
+///
 @available(iOS 17.0, *)
 struct DetailProductView: View {
     let item: Object

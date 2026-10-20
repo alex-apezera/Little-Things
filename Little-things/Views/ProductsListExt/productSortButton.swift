@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 extension ProductsList {
     
+    /// Button for sort of the media files in Favorites by name or price.
+    ///
     var productSortButton: some View {
         
         Button {

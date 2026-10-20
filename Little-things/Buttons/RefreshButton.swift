@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-//MARK: - Remove all items
+/// Refresh action for  all items
+///
 struct RefreshButton: View {
     @State private var isRefreshAll = false
     @EnvironmentObject private var dataModel: DataModel

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Formatted message.
+///
 struct Message: View {
     let message: String
     var body: some View {

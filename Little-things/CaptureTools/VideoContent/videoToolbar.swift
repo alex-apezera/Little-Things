@@ -9,9 +9,9 @@
 import SwiftUI
 extension VideoContentView {
     
-    ///Toggle Camera in off/on position
+    /// Toggle Camera in off/on position
     ///
-    /// - Note: Sometimes this action is useful for saving resources. This works correctly above iOS 17.0.
+    /// - Note: Sometimes this action is useful for saving resources.
     ///
     @ToolbarContentBuilder
     var videoToolbar: some ToolbarContent {

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-//MARK: - Delete item
+/// Delete action for the item
+///
 struct DeleteItem: View {
     var action: () -> Void = {}
     var body: some View {

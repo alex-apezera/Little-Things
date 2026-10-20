@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-//MARK: - Remove all items
+/// Remove action for all items
+///
 struct DeleteButton: View {
     let allObjects: Bool
     var action: () -> Void = {}

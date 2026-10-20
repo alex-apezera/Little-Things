@@ -9,7 +9,9 @@ import SwiftUI
 
 @available(iOS 17.0, *)
 extension ProductsList {
-
+    
+    /// Sorted message for the productsToolbar
+    ///
     @ViewBuilder var sortedMessage: some View {
         VStack(alignment: .center) {
             if products.isEmpty {

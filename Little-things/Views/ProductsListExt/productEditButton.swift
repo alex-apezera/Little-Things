@@ -10,6 +10,8 @@ import SwiftUI
 @available(iOS 17.0, *)
 extension ProductsList {
     
+    /// Button for manage the media files in favorites gallery
+    ///
     var productEditButton: some View {
         
         Button {
