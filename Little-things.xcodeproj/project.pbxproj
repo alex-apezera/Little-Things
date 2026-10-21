@@ -80,6 +80,7 @@
 		19CE9BB63088F14D00B78C0A /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB23088F14D00B78C0A /* ActivityView.swift */; };
 		19CE9BB73088F14D00B78C0A /* itemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB33088F14D00B78C0A /* itemProvider.swift */; };
 		19CE9BB83088F14D00B78C0A /* ItemToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB43088F14D00B78C0A /* ItemToolbar.swift */; };
+		19CE9BBA30895AC500B78C0A /* SimpleDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB930895AC500B78C0A /* SimpleDescription.swift */; };
 		19F4A7CA2D2AE75B00851966 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7C92D2AE75B00851966 /* Settings.swift */; };
 		19F4A7CC2D2B048800851966 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7CB2D2B048700851966 /* ImageManager.swift */; };
 		19F4A7CE2D2BF16F00851966 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7CD2D2BF16F00851966 /* ViewExt.swift */; };
@@ -181,6 +182,7 @@
 		19CE9BB23088F14D00B78C0A /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		19CE9BB33088F14D00B78C0A /* itemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemProvider.swift; sourceTree = "<group>"; };
 		19CE9BB43088F14D00B78C0A /* ItemToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToolbar.swift; sourceTree = "<group>"; };
+		19CE9BB930895AC500B78C0A /* SimpleDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDescription.swift; sourceTree = "<group>"; };
 		19F4A7C92D2AE75B00851966 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		19F4A7CB2D2B048700851966 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		19F4A7CD2D2BF16F00851966 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				19F4A7D32D2C105B00851966 /* DetailImageView.swift */,
 				19BA303E2DA94FFD00CFBB0A /* DetailFileView.swift */,
 				197C75582D3EDC1C00D354C3 /* ObjectDescription.swift */,
+				19CE9BB930895AC500B78C0A /* SimpleDescription.swift */,
 				19BA301B2DA7186700CFBB0A /* Gesture */,
 			);
 			path = SubViews;
@@ -599,6 +602,7 @@
 				19BE05CD2D47F31F00F3210B /* productAddButton.swift in Sources */,
 				19BA303D2DA94C2800CFBB0A /* SelectedFileView.swift in Sources */,
 				197C75592D3EDC1C00D354C3 /* ObjectDescription.swift in Sources */,
+				19CE9BBA30895AC500B78C0A /* SimpleDescription.swift in Sources */,
 				193E58A02D319AFF0050A102 /* ProductService.swift in Sources */,
 				19F4A7CC2D2B048800851966 /* ImageManager.swift in Sources */,
 				197C75572D3ECD4900D354C3 /* productGridMode.swift in Sources */,
@@ -801,6 +805,7 @@
 				DEVELOPMENT_TEAM = GXY9RNHAP8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -834,6 +839,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Little-things/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Little-things/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -879,6 +885,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Little-things/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Little-things/Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;

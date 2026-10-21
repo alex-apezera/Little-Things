@@ -21,9 +21,9 @@ let iPadDevice: Bool = UIDevice.current.userInterfaceIdiom == .pad
 ///
 var scaleOfPhoto = iPadDevice ? 0.6 : 0.85
 
-///Message for a detail view of the mini gallery
+///Message for a detail view of the  gallery and favorites
 ///
-let forDetailView = "Объекты с одинаковым названием"
+let forDetailView = "Объект"
 
 ///App localized for `Russian`
 ///
