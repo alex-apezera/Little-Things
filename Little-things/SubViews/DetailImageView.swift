@@ -49,6 +49,11 @@ struct DetailImageView: View {
             }
         }
         .padding(.horizontal, 10)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ItemToolbar(item: item)
+            }
+        }
         .navigationModifier(forDetailView)
     }
 }

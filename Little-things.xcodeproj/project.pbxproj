@@ -77,6 +77,9 @@
 		19BE05CD2D47F31F00F3210B /* productAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE05CC2D47F31F00F3210B /* productAddButton.swift */; };
 		19BE05CF2D47F52C00F3210B /* imageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE05CE2D47F52C00F3210B /* imageEditButton.swift */; };
 		19BE05D52D48FD8500F3210B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 19BE05D32D48FD8500F3210B /* Localizable.strings */; };
+		19CE9BB63088F14D00B78C0A /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB23088F14D00B78C0A /* ActivityView.swift */; };
+		19CE9BB73088F14D00B78C0A /* itemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB33088F14D00B78C0A /* itemProvider.swift */; };
+		19CE9BB83088F14D00B78C0A /* ItemToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CE9BB43088F14D00B78C0A /* ItemToolbar.swift */; };
 		19F4A7CA2D2AE75B00851966 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7C92D2AE75B00851966 /* Settings.swift */; };
 		19F4A7CC2D2B048800851966 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7CB2D2B048700851966 /* ImageManager.swift */; };
 		19F4A7CE2D2BF16F00851966 /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F4A7CD2D2BF16F00851966 /* ViewExt.swift */; };
@@ -175,6 +178,9 @@
 		19BE05D42D48FD8500F3210B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		19BE05D62D48FF3900F3210B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		19CA17DA2DCE806500AC595F /* Little-thingsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Little-thingsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19CE9BB23088F14D00B78C0A /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		19CE9BB33088F14D00B78C0A /* itemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemProvider.swift; sourceTree = "<group>"; };
+		19CE9BB43088F14D00B78C0A /* ItemToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToolbar.swift; sourceTree = "<group>"; };
 		19F4A7C92D2AE75B00851966 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		19F4A7CB2D2B048700851966 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		19F4A7CD2D2BF16F00851966 /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
@@ -229,6 +235,7 @@
 		193E58912D3085250050A102 /* FileService */ = {
 			isa = PBXGroup;
 			children = (
+				19CE9BB53088F14D00B78C0A /* Export */,
 				193E588D2D2F18470050A102 /* DataService.swift */,
 				19BE05BF2D46EBDB00F3210B /* RefreshUrls.swift */,
 				197EE7C82D220B81004845A3 /* URL.swift */,
@@ -440,6 +447,16 @@
 			path = ProductsListExt;
 			sourceTree = "<group>";
 		};
+		19CE9BB53088F14D00B78C0A /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				19CE9BB23088F14D00B78C0A /* ActivityView.swift */,
+				19CE9BB33088F14D00B78C0A /* itemProvider.swift */,
+				19CE9BB43088F14D00B78C0A /* ItemToolbar.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
 		19F4A7DC2D2D4FEF00851966 /* TextService */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +638,9 @@
 				19BE05CF2D47F52C00F3210B /* imageEditButton.swift in Sources */,
 				19BA30262DA8621D00CFBB0A /* dateString.swift in Sources */,
 				19BA30222DA859EB00CFBB0A /* Movie.swift in Sources */,
+				19CE9BB63088F14D00B78C0A /* ActivityView.swift in Sources */,
+				19CE9BB73088F14D00B78C0A /* itemProvider.swift in Sources */,
+				19CE9BB83088F14D00B78C0A /* ItemToolbar.swift in Sources */,
 				19BE05B82D43C3D000F3210B /* GesturedPhotoView.swift in Sources */,
 				197EE7C12D21F8F1004845A3 /* Item.swift in Sources */,
 				19BA30112D9DE09300CFBB0A /* VideoContentView.swift in Sources */,
