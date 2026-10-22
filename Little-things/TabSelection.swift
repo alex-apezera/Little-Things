@@ -26,20 +26,18 @@ struct TabSelection: View {
             .tabItem { Label("Галерея", systemImage: "photo.on.rectangle") }
             .tag(0)
             
-            if #available(iOS 17.0, *) {
-                NavigationView {
-                    ProductsView().environmentObject(dataModel)
-                }
-                .badge(productsCount)
-                .tabItem { Label("Избранное", systemImage: "star.square.on.square") }
-                .tag(1)
+            NavigationView {
+                ProductsView().environmentObject(dataModel)
             }
+            .badge(productsCount)
+            .tabItem { Label("Избранное", systemImage: "star.square.on.square") }
+            .tag(1)
             
             NavigationView {
-                Settings(title: "Настройки")
+                Settings()
             }
             .badge("3")
-            .tabItem { Label("Настройки", systemImage: "gear") }
+            .tabItem { Label(Settings().title, systemImage: "gear") }
             .tag(2)
         }
         .navigationModifier("Главное меню")

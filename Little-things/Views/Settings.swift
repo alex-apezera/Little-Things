@@ -11,12 +11,10 @@ import SwiftUI
 ///
 /// This stored for the next App session.
 struct Settings: View {
-    let title: String
+    let title = "Настройки"
     @AppStorage("onlyPhotoSelection") var onlyPhotoSelection = true
     @AppStorage("saveToPhotoLibrary") var saveToPhotoLibrary = false
-    @AppStorage("initialColumns") var initialColumns = 3
     @AppStorage("galleryColumns") var galleryColumns = 3
-    @AppStorage("initialColumnsFavorite") var initialColumnsFavorite = 3
     @AppStorage("enableVideo") var enableVideo = false
     @AppStorage("jpegCompression") var jpegCompression: Double  = 1.0
     let compressionQualities: [Double] = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
@@ -51,16 +49,6 @@ struct Settings: View {
                 else { saveToPhotoLibrary = false}
             }
             Section(header: Text("Количество столбцов в сетке").font(.uppercaseSmallCaps(.body)())) {
-                Stepper("Галерея: \(initialColumns)") {
-                    initialColumns += 1
-                } onDecrement: {
-                    initialColumns -= 1
-                }
-                Stepper("Избранные: \(initialColumnsFavorite)") {
-                    initialColumnsFavorite += 1
-                } onDecrement: {
-                    initialColumnsFavorite -= 1
-                }
                 Stepper("Съёмка: \(galleryColumns)") {
                     galleryColumns += 1
                 } onDecrement: {

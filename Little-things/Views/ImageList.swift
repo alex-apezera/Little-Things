@@ -26,8 +26,7 @@ struct ImageList: View {
     @AppStorage("copyFile") var copyFile: URL = URL(fileURLWithPath: "")
     
     @AppStorage("lastUpdatedObject")
-    var lastUpdatedObject = /*Date().timeIntervalSince1970*/
-        Date.distantFuture.timeIntervalSince1970
+    var lastUpdatedObject = Date.distantFuture.timeIntervalSince1970
     @AppStorage("lastUpdatedProduct")
     var lastUpdatedProduct = Date.distantFuture.timeIntervalSince1970
     
@@ -67,6 +66,8 @@ struct ImageList: View {
         .onChange(of: selectedItems) { _, newItems in ///Get & store data from items
             storeImagesData(newItems)
         }
+        .onChange(of: gridColumns.count) { _, newValue in
+            ImageList.initialColumns = newValue}
         .refreshable {storeDataObject(dataModel.items)}
         .toolbar {imageListToolbar}
         .environment(\.editMode, $editMode)

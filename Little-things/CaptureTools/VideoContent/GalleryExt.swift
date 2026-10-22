@@ -23,15 +23,14 @@ extension GalleryView {
         image
             .resizable()
             .scaledToFill()
-            .frame(width: 125, height: 125)
+            .frame(width: 130, height: 130)
             .clipped()
             .clipShape(RoundedRectangle(cornerRadius: 8))
-            .shadow(radius: 3)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(.white, lineWidth: 1)
             )
-            .padding(.vertical, 2)
+            .padding(.vertical, 5)
     }
 
     /// Mini gallery of photos with actions

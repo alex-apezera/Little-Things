@@ -67,6 +67,8 @@ struct ProductsList: View {
             restoreProductsFromDataModel
             productsCount = productsCounter
         }
+        .onChange(of: gridColumns.count) { _, newValue in
+            ProductsList.initialColumns = newValue}
         .toolbar{productsToolbar}
         .environment(\.editMode, $editMode)
         .listStyle(.inset)
