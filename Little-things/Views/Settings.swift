@@ -43,17 +43,16 @@ struct Settings: View {
                         Text(String(number))
                     }
                 }
-            }
-            .onChange(of: enableVideo) { _, newValue in
-                if newValue { saveToPhotoLibrary = true }
-                else { saveToPhotoLibrary = false}
-            }
-            Section(header: Text("Количество столбцов в сетке").font(.uppercaseSmallCaps(.body)())) {
-                Stepper("Съёмка: \(galleryColumns)") {
+                Stepper("Столбцов в минигалерее: \(galleryColumns)") {
                     galleryColumns += 1
                 } onDecrement: {
                     galleryColumns -= 1
                 }
+
+            }
+            .onChange(of: enableVideo) { _, newValue in
+                if newValue { saveToPhotoLibrary = true }
+                else { saveToPhotoLibrary = false}
             }
         }
         .font(.uppercaseSmallCaps(.body)())

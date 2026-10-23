@@ -33,7 +33,6 @@ struct GalleryView: View {
     @State var menuSelection: Int = 1
     @State var showDetailView: Bool = false
     @State var showMessage: Bool = false
-    @AppStorage("galleryColumns") var galleryColumns = 3
     @State var photosPickerItems: [PhotosPickerItem] = []
     var title: String {
         switch mediaType {
@@ -41,6 +40,13 @@ struct GalleryView: View {
         case .photo: "фото"
         }
     }
+    
+    // Settings for a minigallery geometry
+    @AppStorage("galleryColumns") var galleryColumns = 3
+    @State var galleryWidth: CGFloat = 0
+    let gallerySpacing: CGFloat = 5
+    let galleryVerticalPadding: CGFloat = 3
+
 
     var body: some View {
         VStack(alignment: .center) {
@@ -65,7 +71,7 @@ struct GalleryView: View {
                 }
             }
 
-            ScrollView {/// Present media files
+            ScrollView {/// Present media files in minigallery
                 switch mediaType {
                 case .photo: photoGallery
                 case .video: videoGallery

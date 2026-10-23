@@ -10,6 +10,32 @@ import PhotosUI
 
 extension GalleryView {
     
+    /// Auxiliary calculations for minigallery width
+    ///
+    private struct GalleryWidthKey: PreferenceKey {
+        static var defaultValue: CGFloat = 0
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = max(value, nextValue())
+        }
+    }
+
+    /// Side value of a thumbnail
+    ///
+    private func gallerySide(width: CGFloat) -> CGFloat {
+        let columnsCount = max(1, galleryColumns)
+        return max(1, (width - gallerySpacing * CGFloat(columnsCount - 1)) / CGFloat(columnsCount))
+    }
+
+    /// Height of a minigallery
+    ///
+    private func galleryHeight(width: CGFloat) -> CGFloat {
+        let columnsCount = max(1, galleryColumns)
+        let side = gallerySide(width: width)
+        let rows = ceil(Double(viewModel.photoFiles.count) / Double(columnsCount))
+        return CGFloat(rows) * (side + galleryVerticalPadding)
+    }
+
+    
     /// Disappearing message
     ///
     private func messageManage() {
@@ -17,28 +43,32 @@ extension GalleryView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {  withAnimation { showMessage = false } }
     }
     
-    /// Thumbnail image of the photo or the first video frame
+    /// Thumbnail image of a photo or a first video frame
     ///
-    func detailContent(with image: Image) -> some View {
+    func detailContent(with image: Image, side: CGFloat) -> some View {
         image
             .resizable()
             .scaledToFill()
-            .frame(width: 130, height: 130)
+            .frame(width: side, height: side) // Square
             .clipped()
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .clipShape(RoundedRectangle(cornerRadius: 5))
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 5)
                     .stroke(.white, lineWidth: 1)
             )
-            .padding(.vertical, 5)
+            .padding(.vertical, galleryVerticalPadding)
     }
 
     /// Mini gallery of photos with actions
     ///
+    @ViewBuilder
     var photoGallery: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: 100, maximum: 200)), count: galleryColumns), spacing: 5) {
+        let columnsCount = max(1, galleryColumns)
+        let side = gallerySide(width: galleryWidth)
+
+        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: side, maximum: side)), count: columnsCount), spacing: gallerySpacing) {
             ForEach(viewModel.photoFiles) { file in
-                detailContent(with: file.image)
+                detailContent(with: file.image, side: side)
                     .onTapGesture {
                         if menuSelection == 1 {
                             fileImageCover = file.image
@@ -50,18 +80,29 @@ extension GalleryView {
                     }
             }
         }
+        .background(
+            GeometryReader { geo in
+                Color.clear.preference(key: GalleryWidthKey.self, value: geo.size.width)
+            }
+        )
+        .onPreferenceChange(GalleryWidthKey.self) { galleryWidth = $0 }
+        .frame(height: galleryWidth == 0 ? nil : galleryHeight(width: galleryWidth))
         .showMessageInBox("Фото сейчас перемещено в галерею объектов", showMessage)
-        .padding(.leading, 5)
-        .padding(.trailing, 5)
+        .padding(.leading, gallerySpacing)
+        .padding(.trailing, gallerySpacing)
         .onAppear {viewModel.fetchPhotoFiles()}
     }
     
-    /// Mini gallery of the first video frames with actions
+    /// Mini gallery of first video frames with actions
     ///
+    @ViewBuilder
     var videoGallery: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: 100, maximum: 200)), count: galleryColumns), spacing: 2) {
+        let columnsCount = max(1, galleryColumns)
+        let side = gallerySide(width: galleryWidth)
+
+        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: side, maximum: side)), count: columnsCount), spacing: gallerySpacing) {
             ForEach(viewModel.videoFiles) { file in
-                detailContent(with: file.thumbnailImage)
+                detailContent(with: file.thumbnailImage, side: side)
                     .onTapGesture {
                         if menuSelection == 1 {
                             fileImageCover = file.thumbnailImage
@@ -73,9 +114,16 @@ extension GalleryView {
                     }
             }
         }
+        .background(
+            GeometryReader { geo in
+                Color.clear.preference(key: GalleryWidthKey.self, value: geo.size.width)
+            }
+        )
+        .onPreferenceChange(GalleryWidthKey.self) { galleryWidth = $0 }
+        .frame(height: galleryWidth == 0 ? nil : galleryHeight(width: galleryWidth))
         .showMessageInBox("Видео уже в галерее объектов", showMessage)
-        .padding(.leading, 5)
-        .padding(.trailing, 5)
+        .padding(.leading, gallerySpacing)
+        .padding(.trailing, gallerySpacing)
         .onAppear {viewModel.fetchVideoFiles()}
     }
     
