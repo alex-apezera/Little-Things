@@ -11,11 +11,21 @@ import SwiftUI
 ///
 let idLength: Int = 8
 
-///Global property which checks device is it iPad (or iPhone)
+///Global property which checks device is it iPad (or Mac)
 ///
 ///It is `true` when device is iPad, and `false` otherwise
 ///
 let iPadDevice: Bool = UIDevice.current.userInterfaceIdiom == .pad
+
+/// This is false on a real device to avoid  aespa session crash.
+///
+var isMacDesignedForIPad: Bool {
+    #if targetEnvironment(macCatalyst)
+    return true
+    #else
+    return ProcessInfo.processInfo.isiOSAppOnMac
+    #endif
+}
 
 ///Scales an image in `Detail Views` on `NavigationLink` screen
 ///

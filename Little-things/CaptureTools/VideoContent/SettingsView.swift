@@ -23,6 +23,21 @@ struct SettingView: View {
     @State private var flashMode: AVCaptureDevice.FlashMode
     @AppStorage("iPadPortrait") var iPadPortrait: Bool = false
     
+    private struct TitledPicker: ViewModifier {
+        let title: String
+        func body(content: Content) -> some View {
+            VStack(alignment: .leading) {
+                Text(title)
+                    .foregroundColor(.gray)
+                    .font(.caption)
+                
+                content
+                    .pickerStyle(.segmented)
+                    .frame(height: 40)
+            }
+        }
+    }
+    
     init(contentViewModel viewModel: VideoContentViewModel) {
         self.viewModel = viewModel
         
@@ -95,18 +110,4 @@ struct SettingView: View {
         }
     }
     
-    struct TitledPicker: ViewModifier {
-        let title: String
-        func body(content: Content) -> some View {
-            VStack(alignment: .leading) {
-                Text(title)
-                    .foregroundColor(.gray)
-                    .font(.caption)
-                
-                content
-                    .pickerStyle(.segmented)
-                    .frame(height: 40)
-            }
-        }
-    }
 }

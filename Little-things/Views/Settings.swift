@@ -48,6 +48,7 @@ struct Settings: View {
                 } onDecrement: {
                     galleryColumns -= 1
                 }
+                .disabled(isMacDesignedForIPad)
 
             }
             .onChange(of: enableVideo) { _, newValue in

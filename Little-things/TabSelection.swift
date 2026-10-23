@@ -36,7 +36,6 @@ struct TabSelection: View {
             NavigationView {
                 Settings()
             }
-            .badge("3")
             .tabItem { Label(Settings().title, systemImage: "gear") }
             .tag(2)
         }
