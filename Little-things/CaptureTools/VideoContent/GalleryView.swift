@@ -28,6 +28,8 @@ struct GalleryView: View {
         self._mediaType = mediaType
         self.viewModel = viewModel
     }
+    
+    // Mini gallery properties
     @AppStorage("jpegCompression") var jpegCompression: Double  = 1.0
     @State var fileImageCover: Image? = Image(systemName: "photo")
     @State var menuSelection: Int = 1
@@ -36,8 +38,8 @@ struct GalleryView: View {
     @State var photosPickerItems: [PhotosPickerItem] = []
     var title: String {
         switch mediaType {
-        case .video: "видео"
         case .photo: "фото"
+        case .video: "видео"
         }
     }
     
@@ -45,15 +47,15 @@ struct GalleryView: View {
     @AppStorage("galleryColumns") var galleryColumns = 3
     @State var galleryWidth: CGFloat = 0
     let gallerySpacing: CGFloat = 5
-    let galleryVerticalPadding: CGFloat = 3
+    let galleryVerticalPadding: CGFloat = 5
 
-
+    // Mini gallery view with options of media files
     var body: some View {
         VStack(alignment: .center) {
             Text("Съёмочная \(title)галерея")
                 .font(.title3).foregroundStyle(.secondary).bold()
                 .padding(.top, 10)
-            Picker("Фото", selection: $menuSelection) {/// Manage media files
+            Picker("Медиа", selection: $menuSelection) {
                 Text("Детали").tag(1)
                 Text("Сохранить").tag(2)
                 Text("Удалить").tag(3)
@@ -66,15 +68,18 @@ struct GalleryView: View {
             // Select  media files to delete from library
             if menuSelection == 3 {
                 switch mediaType {
-                case .video: selectObjectsToDelete("Выбрать видео из библиотеки", .videos)
                 case .photo: selectObjectsToDelete("Выбрать фото из библиотеки", .images)
-                }
+                case .video: selectObjectsToDelete("Выбрать видео из библиотеки", .videos)
+               }
             }
 
-            ScrollView {/// Present media files in minigallery
-                switch mediaType {
-                case .photo: photoGallery
-                case .video: videoGallery
+            // Present media files in minigallery
+            GalleryContainer { width in
+                VStack {
+                    switch mediaType {
+                    case .photo: photoGallery(width)
+                    case .video: videoGallery(width)
+                    }
                 }
             }
         }
@@ -82,16 +87,15 @@ struct GalleryView: View {
         .sheet(isPresented: $showDetailView) {
             if let fileImageCover {
                 switch mediaType {
-                case .video:
-                    Text("Просмотр видео доступен в Галерее").font(.footnote).padding(5)
                 case .photo:
                     Text("Просмотр фото")
                         .font(.footnote).padding(5)
+                case .video:
+                    Text("Просмотр видео доступен в Галерее").font(.footnote).padding(5)
                 }
                 GesturedImage(image: fileImageCover)
             }
         }
         .id(showDetailView)
-
     }
 }

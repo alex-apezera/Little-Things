@@ -12,8 +12,8 @@ extension VideoContentView {
     ///
     var captureModeToggle: some View {
         Picker("Режим съёмки", selection: $captureMode) {
-            Text("Видео").tag(AssetType.video)
             Text("Фото").tag(AssetType.photo)
+            Text("Видео").tag(AssetType.video)
         }
         .pickerStyle(.segmented)
         .background(.thinMaterial)
@@ -43,7 +43,7 @@ extension VideoContentView {
     var albumButton: some View {
         Button(action: { showGallery = true }) {
             let coverImage = (
-                captureMode == .video
+                captureMode == .photo
                 ? viewModel.videoAlbumCover
                 : viewModel.photoAlbumCover)
             ?? Image("sc-camera")

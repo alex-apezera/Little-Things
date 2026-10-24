@@ -10,15 +10,28 @@ import PhotosUI
 
 extension GalleryView {
     
-    /// Auxiliary calculations for minigallery width
+    /// Measures the width and transmits it to the galleries.
     ///
-    private struct GalleryWidthKey: PreferenceKey {
-        static var defaultValue: CGFloat = 0
-        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-            value = max(value, nextValue())
+    struct GalleryContainer<Content: View>: View {
+        @ViewBuilder var content: (CGFloat) -> Content
+
+        var body: some View {
+            GeometryReader { geo in
+                ScrollView {
+                    content(geo.size.width)
+                }
+            }
         }
     }
-
+    
+    /// Side value of a thumbnail
+    ///
+    private func gallerySide(containerWidth: CGFloat, columns: Int) -> CGFloat {
+        let n = max(1, columns)
+        let usable = max(1, containerWidth - gallerySpacing * CGFloat(n - 1))
+        return max(1, usable / CGFloat(n))
+    }
+    
     /// Side value of a thumbnail
     ///
     private func gallerySide(width: CGFloat) -> CGFloat {
@@ -26,16 +39,6 @@ extension GalleryView {
         return max(1, (width - gallerySpacing * CGFloat(columnsCount - 1)) / CGFloat(columnsCount))
     }
 
-    /// Height of a minigallery
-    ///
-    private func galleryHeight(width: CGFloat) -> CGFloat {
-        let columnsCount = max(1, galleryColumns)
-        let side = gallerySide(width: width)
-        let rows = ceil(Double(viewModel.photoFiles.count) / Double(columnsCount))
-        return CGFloat(rows) * (side + galleryVerticalPadding)
-    }
-
-    
     /// Disappearing message
     ///
     private func messageManage() {
@@ -56,77 +59,72 @@ extension GalleryView {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(.white, lineWidth: 1)
             )
-            .padding(.vertical, galleryVerticalPadding)
+    }
+    
+    /// Mini gallery with actions
+    ///
+    @ViewBuilder
+    func galleryGrid<Item: Identifiable, Cell: View>(
+        containerWidth: CGFloat,
+        items: [Item],
+        @ViewBuilder cell: @escaping (Item, CGFloat) -> Cell
+    ) -> some View {
+        let columnsCount = max(1, galleryColumns)
+        let side = gallerySide(containerWidth: containerWidth, columns: columnsCount)
+
+        LazyVGrid(
+            columns: Array(
+                repeating: GridItem(.adaptive(minimum: side, maximum: side), spacing: gallerySpacing),
+                count: columnsCount
+            ),
+            spacing: gallerySpacing
+        ) {
+            ForEach(items) { item in
+                cell(item, side)
+            }
+        }
+        .padding(.horizontal, gallerySpacing)
+        .padding(.vertical, galleryVerticalPadding/2)
     }
 
+    
     /// Mini gallery of photos with actions
     ///
-    @ViewBuilder
-    var photoGallery: some View {
-        let columnsCount = max(1, galleryColumns)
-        let side = gallerySide(width: galleryWidth)
-
-        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: side, maximum: side)), count: columnsCount), spacing: gallerySpacing) {
-            ForEach(viewModel.photoFiles) { file in
-                detailContent(with: file.image, side: side)
-                    .onTapGesture {
-                        if menuSelection == 1 {
-                            fileImageCover = file.image
-                            withAnimation { showDetailView = true }
-                        } else if menuSelection == 2 {
-                            UsePhoto(dataModel: dataModel).storePhotoToGallery(uiimage: file.uiimage)
-                            messageManage()
-                        }
+    func photoGallery(_ width: CGFloat) -> some View {
+        galleryGrid(containerWidth: width, items: viewModel.photoFiles) { file, side in
+            detailContent(with: file.image, side: side)
+                .onTapGesture {
+                    if menuSelection == 1 {
+                        fileImageCover = file.image
+                        withAnimation { showDetailView = true }
+                    } else if menuSelection == 2 {
+                        UsePhoto(dataModel: dataModel).storePhotoToGallery(uiimage: file.uiimage)
+                        messageManage()
                     }
-            }
+                }
         }
-        .background(
-            GeometryReader { geo in
-                Color.clear.preference(key: GalleryWidthKey.self, value: geo.size.width)
-            }
-        )
-        .onPreferenceChange(GalleryWidthKey.self) { galleryWidth = $0 }
-        .frame(height: galleryWidth == 0 ? nil : galleryHeight(width: galleryWidth))
         .showMessageInBox("Фото сейчас перемещено в галерею объектов", showMessage)
-        .padding(.leading, gallerySpacing)
-        .padding(.trailing, gallerySpacing)
         .onAppear {viewModel.fetchPhotoFiles()}
     }
-    
-    /// Mini gallery of first video frames with actions
-    ///
-    @ViewBuilder
-    var videoGallery: some View {
-        let columnsCount = max(1, galleryColumns)
-        let side = gallerySide(width: galleryWidth)
 
-        LazyVGrid(columns: Array(repeating: GridItem(.adaptive(minimum: side, maximum: side)), count: columnsCount), spacing: gallerySpacing) {
-            ForEach(viewModel.videoFiles) { file in
-                detailContent(with: file.thumbnailImage, side: side)
-                    .onTapGesture {
-                        if menuSelection == 1 {
-                            fileImageCover = file.thumbnailImage
-                            withAnimation { showDetailView = true }
-                        } else if menuSelection == 2 {
+    /// Mini gallery of videos with actions
+    ///
+    func videoGallery(_ width: CGFloat) -> some View {
+        galleryGrid(containerWidth: width, items: viewModel.videoFiles) { file, side in
+            detailContent(with: file.thumbnailImage, side: side)
+                .onTapGesture {
+                    if menuSelection == 1 {
+                        fileImageCover = file.thumbnailImage
+                        withAnimation { showDetailView = true }
+                    } else if menuSelection == 2 {
                         messageManage()
-                        }
-                            
                     }
-            }
+                }
         }
-        .background(
-            GeometryReader { geo in
-                Color.clear.preference(key: GalleryWidthKey.self, value: geo.size.width)
-            }
-        )
-        .onPreferenceChange(GalleryWidthKey.self) { galleryWidth = $0 }
-        .frame(height: galleryWidth == 0 ? nil : galleryHeight(width: galleryWidth))
         .showMessageInBox("Видео уже в галерее объектов", showMessage)
-        .padding(.leading, gallerySpacing)
-        .padding(.trailing, gallerySpacing)
-        .onAppear {viewModel.fetchVideoFiles()}
+        .onAppear { viewModel.fetchVideoFiles() }
     }
-    
+
     /// Delete action for the thumbnail
     ///
     func selectObjectsToDelete(_ message: String, _ type: PHPickerFilter) -> some View {
@@ -139,10 +137,3 @@ extension GalleryView {
     }
 
 }
-
-//Snipet:
-/*
- DispatchQueue.main.async {
-     UIApplication.shared.sendAction(#selector(UIResponder.resolveClassMethod), to: nil, from: nil, for: nil)
-}
- */

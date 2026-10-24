@@ -23,7 +23,7 @@ struct VideoContentView: View {
     @State var showSetting = false
     @State var showGallery = false
     
-    @State var captureMode: AssetType = .video
+    @State var captureMode: AssetType = .photo
     
     @StateObject var viewModel = VideoContentViewModel()
     @EnvironmentObject var dataModel: DataModel
