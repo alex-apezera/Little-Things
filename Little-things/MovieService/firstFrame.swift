@@ -30,12 +30,11 @@ public struct FirstFrameView: View {
                     .frame(width: size, height: size)
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .shadow(radius: 3)
                     .overlay(alignment: .bottomLeading) {
                         if !duration.isEmpty {
                             Text(duration)
                                 .font(.caption2)
-                                .background(.black)
+                                .background(.thinMaterial)
                                 .foregroundStyle(.white)
                                 .offset(x: 3, y: -3)
                                 .underline(false)
@@ -62,7 +61,7 @@ public struct FirstFrameView: View {
         }
     }
 }
-
+/*
 /// Separated small view for the duration
 //private struct VideoDurationOverlay: View {
 //    let movie: URL
@@ -79,3 +78,4 @@ public struct FirstFrameView: View {
 //            }
 //    }
 //}
+*/

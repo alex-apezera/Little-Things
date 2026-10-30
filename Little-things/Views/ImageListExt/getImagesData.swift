@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import MapKit
 
 extension ImageList {
 
@@ -45,17 +46,16 @@ extension ImageList {
                 if let coordinate  = result.firstObject?.location?.coordinate {
                     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
                     // Placemark
-                    location.placemark { placemark, error in
-                        guard let placemark else { print("\n", #function, error ?? "Placemark not defined"); return }
-                        // Title and Address of Place
-                        metaData.name = placemark.name ?? ""
-                        metaData.specification = placemark.streetName ?? ""
-                        metaData.specification += " \(placemark.streetNumber ?? "")"
-                        metaData.specification += " \(placemark.city ?? "")"
-                        metaData.specification += " \(placemark.neighborhood ?? "")"
-                        metaData.specification += " \(placemark.state ?? "")"
-                        metaData.specification += " \(placemark.zipCode ?? "")"
-                        metaData.specification += " \(placemark.country ?? "")"
+                    guard let request = MKReverseGeocodingRequest(location: location) else { return }
+                    do {
+                        guard let mapItem = try await request.mapItems.first else { return }
+
+                        let addressRep = mapItem.address
+                        metaData.specification = addressRep?.fullAddress ?? ""
+                        metaData.name = mapItem.name ?? ""
+                        print("🆕", #function, metaData.name, metaData.specification)
+                    } catch {
+                        print("⭕️", #function,"Placemark not defined", error)
                     }
                 }
             }
